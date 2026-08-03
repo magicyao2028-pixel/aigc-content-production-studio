@@ -1,0 +1,286 @@
+{
+  "package_version": "0.1",
+  "campaign_id": "CMP-TEA-001",
+  "brief": {
+    "campaign_id": "CMP-TEA-001",
+    "product_name": "Jasmine Tea Gift Box",
+    "objective": "increase qualified short-video product interest",
+    "audience": "urban office workers who value a calm tea break",
+    "channels": [
+      "short-video platform",
+      "product detail page"
+    ],
+    "product_facts": [
+      "The gift box contains individually packed jasmine tea sachets.",
+      "The public sample positions the product for convenient office brewing."
+    ],
+    "prohibited_claims": [
+      "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
+      "Do not invent origin, certification, sales volume or award information."
+    ],
+    "brand_voice": [
+      "warm",
+      "calm",
+      "credible"
+    ],
+    "call_to_action": "Review the product details before choosing the tea that fits your routine.",
+    "deliverables": [
+      {
+        "deliverable_type": "short_video",
+        "aspect_ratio": "9:16",
+        "duration_seconds": 15
+      },
+      {
+        "deliverable_type": "cover_image",
+        "aspect_ratio": "9:16",
+        "duration_seconds": null
+      },
+      {
+        "deliverable_type": "voiceover",
+        "aspect_ratio": "9:16",
+        "duration_seconds": 15
+      }
+    ]
+  },
+  "strategy": {
+    "objective": "increase qualified short-video product interest",
+    "audience": "urban office workers who value a calm tea break",
+    "channel_plan": [
+      "short-video platform",
+      "product detail page"
+    ],
+    "message_pillar": "The gift box contains individually packed jasmine tea sachets.",
+    "supporting_facts": [
+      "The public sample positions the product for convenient office brewing."
+    ],
+    "brand_voice": [
+      "warm",
+      "calm",
+      "credible"
+    ],
+    "call_to_action": "Review the product details before choosing the tea that fits your routine.",
+    "content_hypothesis": "If urban office workers who value a calm tea break sees a concise demonstration anchored to approved product facts, the content may support the objective: increase qualified short-video product interest.",
+    "validation_note": "This hypothesis requires platform and conversion evidence after a controlled release."
+  },
+  "deliverables": [
+    {
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "type": "short_video",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 15,
+      "status": "planned",
+      "human_approval_required": true,
+      "script": {
+        "hook": "A simple way to experience Jasmine Tea Gift Box in a busy day.",
+        "proof": "The gift box contains individually packed jasmine tea sachets. The public sample positions the product for convenient office brewing.",
+        "call_to_action": "Review the product details before choosing the tea that fits your routine."
+      },
+      "shot_plan": [
+        {
+          "beat": "hook",
+          "time": "0-3s",
+          "visual": "Immediate product-context shot of Jasmine Tea Gift Box.",
+          "purpose": "Stop the scroll without an unsupported claim."
+        },
+        {
+          "beat": "proof",
+          "time": "3-9s",
+          "visual": "Demonstrate the approved fact: The gift box contains individually packed jasmine tea sachets.",
+          "purpose": "Show evidence rather than a generic beauty montage."
+        },
+        {
+          "beat": "cta",
+          "time": "9-15s",
+          "visual": "Clean product frame with readable call to action.",
+          "purpose": "Close with one reviewable action."
+        }
+      ],
+      "generation_prompt": "Create a 15-second 9:16 product video for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Voice: warm, calm, credible. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. Keep product identity stable, actions physically coherent, text readable, and leave a clean final CTA frame.",
+      "negative_constraints": [
+        "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
+        "Do not invent origin, certification, sales volume or award information.",
+        "no invented packaging details",
+        "no unstable product appearance",
+        "no unreadable overlay text"
+      ],
+      "quality_checks": [
+        "product consistency",
+        "fact accuracy",
+        "action continuity",
+        "text legibility",
+        "platform-safe framing"
+      ]
+    },
+    {
+      "asset_id": "CMP-TEA-001-02-COVER_IMAGE",
+      "type": "cover_image",
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "status": "planned",
+      "human_approval_required": true,
+      "generation_prompt": "Design a 9:16 short-video cover for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Style: warm, calm, credible. Anchor the visual to this approved fact: The gift box contains individually packed jasmine tea sachets.. Use one clear focal product, strong mobile hierarchy, reserved headline space, and realistic materials.",
+      "negative_constraints": [
+        "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
+        "Do not invent origin, certification, sales volume or award information.",
+        "no duplicate product",
+        "no distorted logo or packaging",
+        "no dense unreadable copy"
+      ],
+      "quality_checks": [
+        "product identity",
+        "mobile readability",
+        "brand tone",
+        "claim compliance",
+        "copyright review"
+      ]
+    },
+    {
+      "asset_id": "CMP-TEA-001-03-VOICEOVER",
+      "type": "voiceover",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 15,
+      "status": "planned",
+      "human_approval_required": true,
+      "voice_script": "Jasmine Tea Gift Box. The gift box contains individually packed jasmine tea sachets. Review the product details before choosing the tea that fits your routine.",
+      "voice_direction": "Natural commercial read; warm, calm, credible; fit within 15 seconds; no synthetic celebrity imitation.",
+      "negative_constraints": [
+        "no unauthorized voice clone",
+        "no exaggerated medical or financial claim"
+      ],
+      "quality_checks": [
+        "pronunciation",
+        "timing",
+        "natural pacing",
+        "claim accuracy",
+        "voice rights"
+      ]
+    }
+  ],
+  "asset_manifest": [
+    {
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "campaign_id": "CMP-TEA-001",
+      "type": "short_video",
+      "status": "planned",
+      "source_brief": "CMP-TEA-001",
+      "expected_evidence": [
+        "generation settings",
+        "generated candidate",
+        "review record",
+        "approved final"
+      ]
+    },
+    {
+      "asset_id": "CMP-TEA-001-02-COVER_IMAGE",
+      "campaign_id": "CMP-TEA-001",
+      "type": "cover_image",
+      "status": "planned",
+      "source_brief": "CMP-TEA-001",
+      "expected_evidence": [
+        "generation settings",
+        "generated candidate",
+        "review record",
+        "approved final"
+      ]
+    },
+    {
+      "asset_id": "CMP-TEA-001-03-VOICEOVER",
+      "campaign_id": "CMP-TEA-001",
+      "type": "voiceover",
+      "status": "planned",
+      "source_brief": "CMP-TEA-001",
+      "expected_evidence": [
+        "generation settings",
+        "generated candidate",
+        "review record",
+        "approved final"
+      ]
+    }
+  ],
+  "review_gates": [
+    {
+      "gate": "FACTS",
+      "owner": "Product / Operations",
+      "checks": [
+        "The gift box contains individually packed jasmine tea sachets.",
+        "The public sample positions the product for convenient office brewing."
+      ],
+      "required": true
+    },
+    {
+      "gate": "BRAND",
+      "owner": "Content Lead",
+      "checks": [
+        "warm",
+        "calm",
+        "credible"
+      ],
+      "required": true
+    },
+    {
+      "gate": "CLAIMS",
+      "owner": "Business Owner",
+      "checks": [
+        "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
+        "Do not invent origin, certification, sales volume or award information."
+      ],
+      "required": true
+    },
+    {
+      "gate": "RIGHTS_PRIVACY",
+      "owner": "Content Lead",
+      "checks": [
+        "copyright",
+        "likeness rights",
+        "voice rights",
+        "personal information"
+      ],
+      "required": true
+    },
+    {
+      "gate": "FINAL_RELEASE",
+      "owner": "Authorized Human",
+      "checks": [
+        "platform rules",
+        "final asset",
+        "CTA",
+        "publishing account"
+      ],
+      "required": true
+    }
+  ],
+  "workflow_trace": [
+    {
+      "tool": "validate_brief",
+      "purpose": "Validate product facts, constraints and deliverable specifications.",
+      "status": "completed"
+    },
+    {
+      "tool": "plan_content_strategy",
+      "purpose": "Translate the business objective into a content direction.",
+      "status": "completed"
+    },
+    {
+      "tool": "build_multimodal_tasks",
+      "purpose": "Create provider-neutral image, video and voice production tasks.",
+      "status": "completed"
+    },
+    {
+      "tool": "create_asset_manifest",
+      "purpose": "Assign stable IDs and expected evidence to planned assets.",
+      "status": "completed"
+    },
+    {
+      "tool": "attach_review_gates",
+      "purpose": "Require factual, brand, rights, privacy and final human review.",
+      "status": "completed"
+    }
+  ],
+  "execution_status": "planned_not_generated",
+  "cost_boundary": "No model API or paid service was called by this public workflow.",
+  "limitations": [
+    "Prompts and shot plans are deterministic planning artifacts, not generated media.",
+    "Provider adapters, asset files, version history and publishing integrations are not implemented.",
+    "Platform compliance and commercial claims require an authorized human reviewer."
+  ]
+}

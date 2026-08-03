@@ -1,0 +1,22 @@
+{
+  "campaign_id": "CMP-TEA-001",
+  "product_name": "Jasmine Tea Gift Box",
+  "objective": "increase qualified short-video product interest",
+  "audience": "urban office workers who value a calm tea break",
+  "channels": ["short-video platform", "product detail page"],
+  "product_facts": [
+    "The gift box contains individually packed jasmine tea sachets.",
+    "The public sample positions the product for convenient office brewing."
+  ],
+  "prohibited_claims": [
+    "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
+    "Do not invent origin, certification, sales volume or award information."
+  ],
+  "brand_voice": ["warm", "calm", "credible"],
+  "call_to_action": "Review the product details before choosing the tea that fits your routine.",
+  "deliverables": [
+    {"type": "short_video", "aspect_ratio": "9:16", "duration_seconds": 15},
+    {"type": "cover_image", "aspect_ratio": "9:16"},
+    {"type": "voiceover", "aspect_ratio": "9:16", "duration_seconds": 15}
+  ]
+}

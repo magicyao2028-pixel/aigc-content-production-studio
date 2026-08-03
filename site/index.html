@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Controlled multimodal AIGC production-planning prototype">
+  <title>AIGC Content Production Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">A</span><span>AIGC Studio</span></div>
+      <nav aria-label="Primary navigation">
+        <a class="active" href="#brief">Brief</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#gates">Review gates</a>
+        <a href="#trace">Trace</a>
+      </nav>
+      <div class="boundary">
+        <strong>Planning prototype</strong>
+        <span>No model call · no generated media</span>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">CONTROLLED MULTIMODAL PRODUCTION</p>
+          <h1>From business brief to a reviewable production package.</h1>
+          <p class="subtitle">Coordinate video, image and voice tasks without losing product facts, compliance limits or approval ownership.</p>
+        </div>
+        <span class="status planned" id="run-status">Planned · not generated</span>
+      </header>
+
+      <section id="brief" class="brief-card" aria-labelledby="brief-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">SYNTHETIC CAMPAIGN BRIEF</p><h2 id="brief-title">Jasmine Tea Gift Box</h2></div>
+          <button id="build-button" type="button">Build package</button>
+        </div>
+        <div class="brief-grid">
+          <div><span>Objective</span><strong>Qualified short-video product interest</strong></div>
+          <div><span>Audience</span><strong>Urban office workers seeking a calm tea break</strong></div>
+          <div><span>Channels</span><strong>Short video · Product detail page</strong></div>
+          <div><span>Voice</span><strong>Warm · Calm · Credible</strong></div>
+        </div>
+        <div class="facts">
+          <article><span class="fact-label">APPROVED FACT</span><p>The gift box contains individually packed jasmine tea sachets.</p></article>
+          <article><span class="risk-label">PROHIBITED CLAIM</span><p>No medical effect, guaranteed sleep improvement or invented certification.</p></article>
+        </div>
+      </section>
+
+      <section id="workflow" aria-labelledby="workflow-title">
+        <div class="section-heading"><div><p class="eyebrow">ONE TRACEABLE FLOW</p><h2 id="workflow-title">Production workflow</h2></div></div>
+        <div class="workflow" id="workflow-steps"></div>
+      </section>
+
+      <section id="deliverables" aria-labelledby="deliverables-title">
+        <div class="section-heading"><div><p class="eyebrow">PROVIDER-NEUTRAL TASKS</p><h2 id="deliverables-title">Multimodal deliverables</h2></div><span class="count">3 planned assets</span></div>
+        <div class="deliverable-grid" id="deliverable-list"></div>
+      </section>
+
+      <section id="gates" aria-labelledby="gates-title">
+        <div class="section-heading"><div><p class="eyebrow">HUMAN AUTHORITY</p><h2 id="gates-title">Mandatory review gates</h2></div><span class="count">5 required</span></div>
+        <div class="gate-grid" id="gate-list"></div>
+      </section>
+
+      <section id="trace" aria-labelledby="trace-title">
+        <div class="section-heading"><div><p class="eyebrow">AUDITABLE ORCHESTRATION</p><h2 id="trace-title">Execution trace</h2></div></div>
+        <ol class="trace-list" id="trace-list"><li>Waiting to build the package.</li></ol>
+      </section>
+
+      <footer>v0.1 product-validation MVP · Synthetic brief · Planning artifacts only · No paid API</footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
