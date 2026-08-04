@@ -1,0 +1,65 @@
+{
+  "ledger_version": "1.0",
+  "campaign_id": "CMP-TEA-001",
+  "assets": {
+    "CMP-TEA-001-01-SHORT_VIDEO": {
+      "current_status": "in_review",
+      "version": 3
+    },
+    "CMP-TEA-001-02-COVER_IMAGE": {
+      "current_status": "planned",
+      "version": 1
+    },
+    "CMP-TEA-001-03-VOICEOVER": {
+      "current_status": "planned",
+      "version": 1
+    }
+  },
+  "events": [
+    {
+      "event_id": "EVT-0001",
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "version": 1,
+      "from_status": null,
+      "to_status": "planned",
+      "actor": "workflow",
+      "note": "Asset registered from the production package manifest."
+    },
+    {
+      "event_id": "EVT-0002",
+      "asset_id": "CMP-TEA-001-02-COVER_IMAGE",
+      "version": 1,
+      "from_status": null,
+      "to_status": "planned",
+      "actor": "workflow",
+      "note": "Asset registered from the production package manifest."
+    },
+    {
+      "event_id": "EVT-0003",
+      "asset_id": "CMP-TEA-001-03-VOICEOVER",
+      "version": 1,
+      "from_status": null,
+      "to_status": "planned",
+      "actor": "workflow",
+      "note": "Asset registered from the production package manifest."
+    },
+    {
+      "event_id": "EVT-0004",
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "version": 2,
+      "from_status": "planned",
+      "to_status": "generated_candidate",
+      "actor": "content-operator",
+      "note": "Candidate file and generation settings recorded."
+    },
+    {
+      "event_id": "EVT-0005",
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "version": 3,
+      "from_status": "generated_candidate",
+      "to_status": "in_review",
+      "actor": "content-lead",
+      "note": "Candidate submitted to the five review gates."
+    }
+  ]
+}

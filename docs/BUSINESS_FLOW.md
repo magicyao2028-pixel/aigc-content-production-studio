@@ -10,11 +10,12 @@ flowchart TB
     V -->|Yes| S[Content strategy]
     S --> T[Video, image and voice tasks]
     T --> M[Asset manifest]
-    M --> F[Fact and claims review]
+    M --> CAND[Generated candidate recorded]
+    CAND --> F[Fact and claims review]
     F --> P[Brand, rights and privacy review]
     P --> A{Final human approval}
-    A -->|Approved| X[External generation/editing outside v0.1]
-    A -->|Rejected| C
+    A -->|Approved| X[Approved final recorded]
+    A -->|Changes requested| CAND
 ```
 
 ## Role boundaries
@@ -28,3 +29,5 @@ flowchart TB
 | Authorized Publisher | Makes the final external publishing decision. |
 
 The workflow never treats generation output as automatically approved. Rejected assets return to the task or brief that caused the problem.
+
+The v0.2 local ledger records each status change as a new event. It prevents `planned → approved_final` and other skipped-review transitions, but it does not authenticate the named actor; production approval still requires an authorized system and organizational control.

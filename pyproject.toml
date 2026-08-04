@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aigc-content-production-studio"
-version = "0.1.0"
+version = "0.2.0"
 description = "An offline, controlled multimodal content-production planning workflow."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -14,6 +14,7 @@ dependencies = []
 
 [project.scripts]
 aigc-studio = "aigc_content_studio.cli:main"
+aigc-assets = "aigc_content_studio.asset_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

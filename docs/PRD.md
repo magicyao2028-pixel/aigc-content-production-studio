@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Product | AIGC Content Production Studio |
-| Version | 0.1 |
+| Version | 0.2 |
 | Status | Product-validation MVP |
 | Primary user | Content operations lead in a small or medium-sized business |
 | Public data policy | Synthetic brief and generated planning artifacts only |
@@ -48,12 +48,14 @@ The public prototype has not been tested with real users. v0.1 validates workflo
 6. Attach five mandatory review gates.
 7. Export a structured production package and execution trace.
 8. Run offline without a paid model call.
+9. Initialize a local ledger from the asset manifest.
+10. Validate status changes and retain every transition event.
 
 ### Out of scope
 
 - image, video, text or voice generation;
 - model-provider authentication and API adapters;
-- asset upload, editing, storage, version history or publishing;
+- asset upload, editing, binary storage or publishing;
 - social account integrations and campaign analytics;
 - production permissions, queues, concurrency and monitoring;
 - claims of business performance or real client use.
@@ -70,6 +72,8 @@ The public prototype has not been tested with real users. v0.1 validates workflo
 | FR-06 | Require review | Must | All deliverables and final release require human approval. |
 | FR-07 | Export package | Should | CLI writes valid JSON to the requested path. |
 | FR-08 | Show trace | Should | Output records the five workflow stages. |
+| FR-09 | Control lifecycle | Must | Assets cannot skip from planned directly to approved final. |
+| FR-10 | Preserve history | Should | Every transition adds an event and increments the asset version. |
 
 ## 7. Future product metrics
 

@@ -65,6 +65,13 @@ section { margin-top: 34px; }
 .specs { margin: 13px 0; display: flex; gap: 6px; flex-wrap: wrap; }
 .specs span { padding: 5px 8px; border-radius: 999px; color: var(--purple-dark); background: var(--lilac); font-size: 10px; font-weight: 720; }
 .approval { padding-top: 11px; border-top: 1px solid var(--line); color: var(--green); font-size: 11px; font-weight: 760; }
+.lifecycle { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; }
+.lifecycle-step { position: relative; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: var(--shadow); }
+.lifecycle-step span { display: inline-block; margin-bottom: 8px; padding: 4px 7px; border-radius: 999px; color: var(--purple-dark); background: var(--lilac); font-size: 10px; font-weight: 800; }
+.lifecycle-step strong, .lifecycle-step small { display: block; }
+.lifecycle-step strong { font-size: 13px; }
+.lifecycle-step small { margin-top: 5px; color: var(--muted); line-height: 1.4; }
+.lifecycle-note { margin: 10px 0 0; color: var(--muted); font-size: 12px; }
 .gate-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 10px; }
 .gate { padding: 15px; border: 1px solid var(--line); border-top: 3px solid var(--purple); border-radius: 12px; background: var(--paper); }
 .gate strong { display: block; margin-bottom: 6px; font-size: 13px; }
@@ -75,7 +82,7 @@ section { margin-top: 34px; }
 footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 
 @media (max-width: 1040px) {
-  .brief-grid, .workflow, .gate-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .brief-grid, .workflow, .gate-grid, .lifecycle { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .deliverable-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
@@ -86,5 +93,5 @@ footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line);
   main { padding: 30px 18px 46px; }
   .topbar { display: block; }
   .status { display: inline-flex; margin-top: 18px; }
-  .brief-grid, .facts, .workflow, .gate-grid { grid-template-columns: 1fr; }
+  .brief-grid, .facts, .workflow, .gate-grid, .lifecycle { grid-template-columns: 1fr; }
 }

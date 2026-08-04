@@ -34,7 +34,7 @@ class ContentProductionWorkflow:
         trace.record("attach_review_gates", "Require factual, brand, rights, privacy and final human review.")
 
         return {
-            "package_version": "0.1",
+            "package_version": "0.2",
             "campaign_id": brief.campaign_id,
             "brief": brief.to_dict(),
             "strategy": strategy,
@@ -46,7 +46,8 @@ class ContentProductionWorkflow:
             "cost_boundary": "No model API or paid service was called by this public workflow.",
             "limitations": [
                 "Prompts and shot plans are deterministic planning artifacts, not generated media.",
-                "Provider adapters, asset files, version history and publishing integrations are not implemented.",
+                "Provider adapters, generated asset files and publishing integrations are not implemented.",
+                "The local asset ledger records workflow evidence but is not a multi-user approval system.",
                 "Platform compliance and commercial claims require an authorized human reviewer.",
             ],
         }

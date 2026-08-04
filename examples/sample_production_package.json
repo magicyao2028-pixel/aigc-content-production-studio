@@ -1,5 +1,5 @@
 {
-  "package_version": "0.1",
+  "package_version": "0.2",
   "campaign_id": "CMP-TEA-001",
   "brief": {
     "campaign_id": "CMP-TEA-001",
@@ -280,7 +280,8 @@
   "cost_boundary": "No model API or paid service was called by this public workflow.",
   "limitations": [
     "Prompts and shot plans are deterministic planning artifacts, not generated media.",
-    "Provider adapters, asset files, version history and publishing integrations are not implemented.",
+    "Provider adapters, generated asset files and publishing integrations are not implemented.",
+    "The local asset ledger records workflow evidence but is not a multi-user approval system.",
     "Platform compliance and commercial claims require an authorized human reviewer."
   ]
 }

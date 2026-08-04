@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 - 2026-08-04
+
+- added an explicit asset state machine with guarded review and revision paths;
+- added a local JSON ledger with stable event IDs and per-asset versions;
+- added initialize and transition CLI commands;
+- added a reproducible asset-history example and six lifecycle regression tests;
+- exposed the lifecycle and honest single-user boundary in the browser prototype and documentation.
+
 ## 0.1.0 - 2026-08-03
 
 - added validated synthetic campaign brief;

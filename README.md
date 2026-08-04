@@ -19,6 +19,7 @@ Small content teams often move directly from a chat message to image, video and 
 - separates approved facts from prohibited claims;
 - creates linked video, cover-image and voiceover tasks;
 - attaches stable asset IDs and expected evidence;
+- enforces explicit asset status transitions and preserves a local event history;
 - requires factual, brand, rights, privacy and release review;
 - works offline without calling a paid model API.
 
@@ -32,6 +33,7 @@ Small content teams often move directly from a chat message to image, video and 
 | Business governance | Approved facts, prohibited claims, responsible owners and final approval |
 | Technical implementation | Typed Python domain model, CLI, deterministic package and automated tests |
 | Product experience | Zero-cost [browser prototype](site/) showing the full planning flow |
+| Asset governance | Validated status machine, append-only local event history and reproducible example ledger |
 
 ## Core workflow
 
@@ -55,6 +57,8 @@ Requirements: Python 3.10 or later. No third-party runtime dependency is require
 ```bash
 python -m pip install -e .
 aigc-studio data/sample_brief.json --output output/production_package.json
+aigc-assets initialize output/production_package.json output/asset_history.json
+aigc-assets transition output/asset_history.json CMP-TEA-001-01-SHORT_VIDEO generated_candidate --actor content-operator --note "Candidate file recorded"
 python -m unittest discover -s tests -v
 ```
 
@@ -84,16 +88,18 @@ Then visit `http://localhost:8000`.
 - five mandatory human review gates;
 - an execution trace and honest implementation limitations.
 
+[`examples/sample_asset_history.json`](examples/sample_asset_history.json) demonstrates local status evidence. The allowed path is `planned → generated_candidate → in_review → approved_final`, with a `changes_requested → generated_candidate` revision loop and optional final archival. Direct approval from `planned` is rejected.
+
 ## Model boundary
 
 The tasks are provider-neutral. A future adapter may route approved tasks to tools such as text, image, video and voice models, but this repository does not claim current access, model performance or commercial rights. Provider availability, pricing, regional access and terms must be checked at execution time.
 
 ## Honest boundaries
 
-- No media asset is generated in v0.1.
+- No media asset is generated in v0.2.
 - No model API, paid service or cloud compute is used.
 - Prompts are deterministic planning artifacts, not proof of output quality.
-- There is no persistence, version history, authentication, queue, publishing integration or campaign analytics.
+- Local JSON history is single-user evidence, not durable multi-user persistence, authentication or an approval system.
 - The synthetic brief is not a real client case.
 - Human review is required before any external generation, publishing or commercial claim.
 
@@ -112,7 +118,7 @@ The tasks are provider-neutral. A future adapter may route approved tasks to too
 ## Roadmap
 
 - v0.1: validated brief, multimodal task package, asset IDs, review gates, tests and static demo;
-- v0.2: asset status transitions and version history;
+- v0.2: asset status transitions and local version history (current);
 - v0.3: configurable prompt templates and provider adapters;
 - v0.4: output-quality evaluation and failure taxonomy;
 - v0.5: optional zero-cost/local model adapter experiments;

@@ -20,6 +20,13 @@ const gates = [
   ["FINAL RELEASE","Authorized Human"]
 ];
 
+const lifecycle = [
+  ["planned","Manifest record created"],
+  ["generated_candidate","Candidate and settings recorded"],
+  ["in_review","Five review gates in progress"],
+  ["approved_final","Authorized human approval recorded"]
+];
+
 const trace = [
   ["validate_brief","Validate product facts, constraints and deliverable specifications."],
   ["plan_content_strategy","Translate the business objective into a content direction."],
@@ -39,6 +46,8 @@ function renderPackage() {
       <div class="specs"><span>${item.ratio}</span><span>${item.duration}</span><span>Provider-neutral</span></div>
       <div class="approval">Human approval required · status: planned</div>
     </article>`).join("");
+  document.getElementById("lifecycle-list").innerHTML = lifecycle.map(([status,detail],index) => `
+    <article class="lifecycle-step"><span>v${index + 1}</span><strong>${status}</strong><small>${detail}</small></article>`).join("");
   document.getElementById("gate-list").innerHTML = gates.map(([gate,owner]) => `
     <article class="gate"><strong>${gate}</strong><span>Owner: ${owner}<br>Required before external release</span></article>`).join("");
   document.getElementById("trace-list").innerHTML = trace.map(([tool,purpose]) => `<li><strong>${tool}</strong> — ${purpose} <small>(completed)</small></li>`).join("");

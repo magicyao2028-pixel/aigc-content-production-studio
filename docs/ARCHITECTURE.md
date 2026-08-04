@@ -22,14 +22,17 @@ flowchart TB
       T[Multimodal task planner]
       M[Asset manifest builder]
       G[Review-gate builder]
+      L[Asset lifecycle validator]
     end
     subgraph Artifacts
       B[Campaign brief JSON]
       P[Production package JSON]
+      H[Local append-only history JSON]
     end
     B --> CLI --> V
     B --> WEB --> V
     V --> S --> T --> M --> G --> P
+    P --> L --> H
 ```
 
 The browser mirrors the product flow for a zero-setup demonstration. The Python package is the reference implementation covered by automated tests.
@@ -41,8 +44,10 @@ The browser mirrors the product flow for a zero-setup demonstration. The Python 
 | `brief.py` | Parse and validate the campaign brief and deliverable specifications. |
 | `workflow.py` | Orchestrate strategy, multimodal tasks, manifest and review gates. |
 | `cli.py` | Provide local JSON input/output. |
+| `lifecycle.py` | Validate asset transitions and preserve stable local event history. |
+| `asset_cli.py` | Initialize a ledger and record one explicit transition at a time. |
 | `data/` | Store the synthetic public brief. |
-| `examples/` | Preserve a reproducible public production package. |
+| `examples/` | Preserve a reproducible public package and asset-history example. |
 | `site/` | Demonstrate the workflow without external services. |
 
 ## Future production architecture
