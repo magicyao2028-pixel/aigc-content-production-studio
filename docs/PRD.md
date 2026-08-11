@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Product | AIGC Content Production Studio |
-| Version | 0.2 |
+| Version | 0.3 |
 | Status | Product-validation MVP |
 | Primary user | Content operations lead in a small or medium-sized business |
 | Public data policy | Synthetic brief and generated planning artifacts only |
@@ -18,7 +18,7 @@ Content teams frequently start production with an incomplete request. Product fa
 
 If one validated brief produces linked multimodal tasks, stable asset IDs and mandatory review gates, a content lead can coordinate AIGC production more consistently and identify missing facts before external generation begins.
 
-The public prototype has not been tested with real users. v0.1 validates workflow logic only.
+The public prototype has not been tested with real users. v0.3 validates workflow, template and request-preparation logic only.
 
 ## 4. Users and jobs to be done
 
@@ -36,7 +36,7 @@ The public prototype has not been tested with real users. v0.1 validates workflo
 - see who is responsible for each review gate;
 - prevent an unapproved asset from being published.
 
-## 5. v0.1 scope
+## 5. v0.3 scope
 
 ### In scope
 
@@ -50,11 +50,14 @@ The public prototype has not been tested with real users. v0.1 validates workflo
 8. Run offline without a paid model call.
 9. Initialize a local ledger from the asset manifest.
 10. Validate status changes and retain every transition event.
+11. Validate configurable prompt templates against an allowlist of business fields.
+12. Report the template-set identity and version in every package.
+13. Validate provider capabilities and prepare reviewable request envelopes without sending them.
 
 ### Out of scope
 
 - image, video, text or voice generation;
-- model-provider authentication and API adapters;
+- model-provider authentication, network execution and production API adapters;
 - asset upload, editing, binary storage or publishing;
 - social account integrations and campaign analytics;
 - production permissions, queues, concurrency and monitoring;
@@ -74,6 +77,9 @@ The public prototype has not been tested with real users. v0.1 validates workflo
 | FR-08 | Show trace | Should | Output records the five workflow stages. |
 | FR-09 | Control lifecycle | Must | Assets cannot skip from planned directly to approved final. |
 | FR-10 | Preserve history | Should | Every transition adds an event and increments the asset version. |
+| FR-11 | Configure prompts safely | Must | Templates define all supported modalities and reject unsafe or unknown placeholders. |
+| FR-12 | Validate provider fit | Must | Unsupported type, ratio or duration fails before a request is prepared. |
+| FR-13 | Prevent external execution | Must | Public profiles cannot enable sending and every request records zero execution. |
 
 ## 7. Future product metrics
 

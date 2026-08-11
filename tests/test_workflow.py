@@ -32,7 +32,8 @@ class ContentProductionWorkflowTests(unittest.TestCase):
         package = ContentProductionWorkflow().run(load_brief(SAMPLE))
 
         self.assertEqual([item["gate"] for item in package["review_gates"]], ["FACTS", "BRAND", "CLAIMS", "RIGHTS_PRIVACY", "FINAL_RELEASE"])
-        self.assertEqual(len(package["workflow_trace"]), 5)
+        self.assertEqual(len(package["workflow_trace"]), 6)
+        self.assertEqual(package["prompt_template"]["template_set_id"], "builtin-safe-default")
 
     def test_rejects_unsupported_deliverable(self):
         value = json.loads(SAMPLE.read_text(encoding="utf-8"))

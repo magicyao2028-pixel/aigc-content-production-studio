@@ -1,8 +1,8 @@
 # Model-Routing Boundary
 
-## v0.1 behavior
+## v0.3 behavior
 
-The repository produces provider-neutral tasks. It does not call or benchmark any model.
+The repository produces provider-neutral tasks, validates prompt templates and can build offline request envelopes. It does not call or benchmark any model.
 
 | Task type | Required capability | Evidence to preserve later |
 | --- | --- | --- |
@@ -10,6 +10,10 @@ The repository produces provider-neutral tasks. It does not call or benchmark an
 | Cover image | Product-consistent image generation | reference assets, model/settings, candidates, selected final |
 | Short video | Identity and action continuity in a timed sequence | references, prompt, duration, ratio, candidates, failure notes |
 | Voiceover | Natural timing and licensed voice | script, voice identity/rights, settings, output, approval |
+
+## Current adapter gate
+
+The included profile declares supported deliverables, aspect ratios and a maximum duration. The adapter rejects incompatible tasks before creating a request envelope. Unknown fields are rejected so credentials and endpoints are not embedded in public profile files. `external_execution_enabled: true` is also rejected.
 
 ## Future routing rule
 

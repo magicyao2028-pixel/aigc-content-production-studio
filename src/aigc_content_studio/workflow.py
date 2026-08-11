@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from .brief import CampaignBrief, DeliverableRequest
+from .templates import PromptTemplateSet, default_template_set
 
 
 @dataclass
@@ -17,6 +18,9 @@ class WorkflowTrace:
 class ContentProductionWorkflow:
     """Builds a reviewable production package without calling a generation model."""
 
+    def __init__(self, template_set: PromptTemplateSet | None = None):
+        self.template_set = template_set or default_template_set()
+
     def run(self, brief: CampaignBrief) -> dict[str, Any]:
         trace = WorkflowTrace()
         trace.record("validate_brief", "Validate product facts, constraints and deliverable specifications.")
@@ -26,6 +30,7 @@ class ContentProductionWorkflow:
 
         deliverables = [self._plan_deliverable(brief, item, index) for index, item in enumerate(brief.deliverables, 1)]
         trace.record("build_multimodal_tasks", "Create provider-neutral image, video and voice production tasks.")
+        trace.record("render_prompt_templates", "Render validated configurable templates without calling a provider.")
 
         manifest = self._build_asset_manifest(brief, deliverables)
         trace.record("create_asset_manifest", "Assign stable IDs and expected evidence to planned assets.")
@@ -34,11 +39,12 @@ class ContentProductionWorkflow:
         trace.record("attach_review_gates", "Require factual, brand, rights, privacy and final human review.")
 
         return {
-            "package_version": "0.2",
+            "package_version": "0.3",
             "campaign_id": brief.campaign_id,
             "brief": brief.to_dict(),
             "strategy": strategy,
             "deliverables": deliverables,
+            "prompt_template": self.template_set.metadata(),
             "asset_manifest": manifest,
             "review_gates": review_gates,
             "workflow_trace": trace.steps,
@@ -46,7 +52,7 @@ class ContentProductionWorkflow:
             "cost_boundary": "No model API or paid service was called by this public workflow.",
             "limitations": [
                 "Prompts and shot plans are deterministic planning artifacts, not generated media.",
-                "Provider adapters, generated asset files and publishing integrations are not implemented.",
+                "Provider request envelopes are optional offline artifacts; no external provider execution is implemented.",
                 "The local asset ledger records workflow evidence but is not a multi-user approval system.",
                 "Platform compliance and commercial claims require an authorized human reviewer.",
             ],
@@ -92,8 +98,7 @@ class ContentProductionWorkflow:
             base.update(self._voice_plan(brief, request))
         return base
 
-    @staticmethod
-    def _video_plan(brief: CampaignBrief, request: DeliverableRequest) -> dict[str, Any]:
+    def _video_plan(self, brief: CampaignBrief, request: DeliverableRequest) -> dict[str, Any]:
         duration = request.duration_seconds or 15
         return {
             "script": {
@@ -106,12 +111,7 @@ class ContentProductionWorkflow:
                 {"beat": "proof", "time": f"{max(2, duration // 5)}-{max(6, duration * 3 // 5)}s", "visual": f"Demonstrate the approved fact: {brief.product_facts[0]}", "purpose": "Show evidence rather than a generic beauty montage."},
                 {"beat": "cta", "time": f"{max(6, duration * 3 // 5)}-{duration}s", "visual": "Clean product frame with readable call to action.", "purpose": "Close with one reviewable action."},
             ],
-            "generation_prompt": (
-                f"Create a {duration}-second {request.aspect_ratio} product video for {brief.product_name}. "
-                f"Audience: {brief.audience}. Voice: {', '.join(brief.brand_voice)}. "
-                f"Use only these approved facts: {'; '.join(brief.product_facts)}. "
-                "Keep product identity stable, actions physically coherent, text readable, and leave a clean final CTA frame."
-            ),
+            "generation_prompt": self.template_set.render(brief, request),
             "negative_constraints": list(brief.prohibited_claims) + [
                 "no invented packaging details",
                 "no unstable product appearance",
@@ -120,15 +120,9 @@ class ContentProductionWorkflow:
             "quality_checks": ["product consistency", "fact accuracy", "action continuity", "text legibility", "platform-safe framing"],
         }
 
-    @staticmethod
-    def _image_plan(brief: CampaignBrief, request: DeliverableRequest) -> dict[str, Any]:
+    def _image_plan(self, brief: CampaignBrief, request: DeliverableRequest) -> dict[str, Any]:
         return {
-            "generation_prompt": (
-                f"Design a {request.aspect_ratio} short-video cover for {brief.product_name}. "
-                f"Audience: {brief.audience}. Style: {', '.join(brief.brand_voice)}. "
-                f"Anchor the visual to this approved fact: {brief.product_facts[0]}. "
-                "Use one clear focal product, strong mobile hierarchy, reserved headline space, and realistic materials."
-            ),
+            "generation_prompt": self.template_set.render(brief, request),
             "negative_constraints": list(brief.prohibited_claims) + [
                 "no duplicate product",
                 "no distorted logo or packaging",
@@ -137,8 +131,7 @@ class ContentProductionWorkflow:
             "quality_checks": ["product identity", "mobile readability", "brand tone", "claim compliance", "copyright review"],
         }
 
-    @staticmethod
-    def _voice_plan(brief: CampaignBrief, request: DeliverableRequest) -> dict[str, Any]:
+    def _voice_plan(self, brief: CampaignBrief, request: DeliverableRequest) -> dict[str, Any]:
         return {
             "voice_script": (
                 f"{brief.product_name}. {brief.product_facts[0]} {brief.call_to_action}"
@@ -147,6 +140,7 @@ class ContentProductionWorkflow:
                 f"Natural commercial read; {', '.join(brief.brand_voice)}; "
                 f"fit within {request.duration_seconds} seconds; no synthetic celebrity imitation."
             ),
+            "generation_prompt": self.template_set.render(brief, request),
             "negative_constraints": ["no unauthorized voice clone", "no exaggerated medical or financial claim"],
             "quality_checks": ["pronunciation", "timing", "natural pacing", "claim accuracy", "voice rights"],
         }

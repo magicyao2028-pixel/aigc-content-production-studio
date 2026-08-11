@@ -18,6 +18,8 @@ Small content teams often move directly from a chat message to image, video and 
 - validates the business brief before generation work begins;
 - separates approved facts from prohibited claims;
 - creates linked video, cover-image and voiceover tasks;
+- renders those tasks from a validated, configurable prompt-template set;
+- prepares provider request envelopes through an adapter interface without sending them;
 - attaches stable asset IDs and expected evidence;
 - enforces explicit asset status transitions and preserves a local event history;
 - requires factual, brand, rights, privacy and release review;
@@ -34,6 +36,7 @@ Small content teams often move directly from a chat message to image, video and 
 | Technical implementation | Typed Python domain model, CLI, deterministic package and automated tests |
 | Product experience | Zero-cost [browser prototype](site/) showing the full planning flow |
 | Asset governance | Validated status machine, append-only local event history and reproducible example ledger |
+| Provider portability | Validated prompt templates and an offline adapter contract separated from the core workflow |
 
 ## Core workflow
 
@@ -42,13 +45,14 @@ flowchart LR
     B[Campaign brief] --> V[Validate facts and constraints]
     V --> S[Content strategy]
     S --> M[Multimodal task planning]
-    M --> A[Asset manifest]
+    M --> T[Validated prompt templates]
+    T --> A[Asset manifest]
     A --> G{Human review gates}
     G -->|Approved| E[External generation and editing]
     G -->|Rejected| R[Revise brief or task]
 ```
 
-The current workflow is deterministic. It does not call an LLM, image model, video model or speech model, so it must not be represented as a production content Agent. It is a runnable workflow and product prototype designed to make later model adapters reviewable.
+The current workflow is deterministic. It does not call an LLM, image model, video model or speech model, so it must not be represented as a production content Agent. v0.3 can prepare provider-shaped request envelopes, but a separate offline adapter always marks them `prepared_not_sent` and executes zero external calls.
 
 ## Quick start
 
@@ -56,7 +60,8 @@ Requirements: Python 3.10 or later. No third-party runtime dependency is require
 
 ```bash
 python -m pip install -e .
-aigc-studio data/sample_brief.json --output output/production_package.json
+aigc-studio data/sample_brief.json --templates data/prompt_templates.json --output output/production_package.json
+aigc-provider-plan output/production_package.json data/offline_provider_profile.json output/provider_requests.json
 aigc-assets initialize output/production_package.json output/asset_history.json
 aigc-assets transition output/asset_history.json CMP-TEA-001-01-SHORT_VIDEO generated_candidate --actor content-operator --note "Candidate file recorded"
 python -m unittest discover -s tests -v
@@ -90,13 +95,15 @@ Then visit `http://localhost:8000`.
 
 [`examples/sample_asset_history.json`](examples/sample_asset_history.json) demonstrates local status evidence. The allowed path is `planned → generated_candidate → in_review → approved_final`, with a `changes_requested → generated_candidate` revision loop and optional final archival. Direct approval from `planned` is rejected.
 
-## Model boundary
+[`examples/sample_provider_requests.json`](examples/sample_provider_requests.json) shows three capability-checked request envelopes. They contain prompts and generation parameters, but every request records `external_call_executed: false`, and the plan records `external_calls_executed: 0`.
 
-The tasks are provider-neutral. A future adapter may route approved tasks to tools such as text, image, video and voice models, but this repository does not claim current access, model performance or commercial rights. Provider availability, pricing, regional access and terms must be checked at execution time.
+## Template and model boundary
+
+The tasks are provider-neutral. Template files may change wording and structure only through an allowlisted set of business fields. Provider profiles declare supported task types, ratios and duration limits; they cannot contain unknown fields such as embedded API keys or enable execution. A future production adapter may route approved tasks to models, but this repository does not claim current access, model performance or commercial rights. Availability, pricing, regional access and terms must be checked at execution time.
 
 ## Honest boundaries
 
-- No media asset is generated in v0.2.
+- No media asset is generated in v0.3.
 - No model API, paid service or cloud compute is used.
 - Prompts are deterministic planning artifacts, not proof of output quality.
 - Local JSON history is single-user evidence, not durable multi-user persistence, authentication or an approval system.
@@ -109,6 +116,7 @@ The tasks are provider-neutral. A future adapter may route approved tasks to too
 - [Business workflow](docs/BUSINESS_FLOW.md)
 - [System architecture](docs/ARCHITECTURE.md)
 - [Model-routing boundary](docs/MODEL_ROUTING.md)
+- [Templates and adapter contract](docs/TEMPLATES_AND_ADAPTERS.md)
 - [Evaluation plan](docs/EVALUATION.md)
 - [Security and governance](docs/SECURITY.md)
 - [Maintenance plan](docs/MAINTENANCE_PLAN.md)
@@ -118,8 +126,8 @@ The tasks are provider-neutral. A future adapter may route approved tasks to too
 ## Roadmap
 
 - v0.1: validated brief, multimodal task package, asset IDs, review gates, tests and static demo;
-- v0.2: asset status transitions and local version history (current);
-- v0.3: configurable prompt templates and provider adapters;
+- v0.2: asset status transitions and local version history;
+- v0.3: configurable prompt templates and non-sending provider adapters (current);
 - v0.4: output-quality evaluation and failure taxonomy;
 - v0.5: optional zero-cost/local model adapter experiments;
 - v1.0: controlled private pilot with approved assets and measured workflow outcomes.

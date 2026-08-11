@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 - 2026-08-11
+
+- added validated, configurable prompt-template sets for video, image and voice tasks;
+- added a provider-adapter protocol and a capability-checked offline demonstration adapter;
+- added a separate CLI that prepares request envelopes but never sends them;
+- rejected unknown profile fields, unsafe template syntax, unsupported modalities, ratios and durations;
+- added reproducible template/profile fixtures, provider-request output and eight focused tests.
+
 ## 0.2.0 - 2026-08-04
 
 - added an explicit asset state machine with guarded review and revision paths;

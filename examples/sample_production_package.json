@@ -1,5 +1,5 @@
 {
-  "package_version": "0.2",
+  "package_version": "0.3",
   "campaign_id": "CMP-TEA-001",
   "brief": {
     "campaign_id": "CMP-TEA-001",
@@ -95,7 +95,7 @@
           "purpose": "Close with one reviewable action."
         }
       ],
-      "generation_prompt": "Create a 15-second 9:16 product video for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Voice: warm, calm, credible. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. Keep product identity stable, actions physically coherent, text readable, and leave a clean final CTA frame.",
+      "generation_prompt": "Create a 15-second 9:16 product video for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Brand voice: warm, calm, credible. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. End with the approved call to action: Review the product details before choosing the tea that fits your routine.. Keep identity, motion and text legible.",
       "negative_constraints": [
         "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
         "Do not invent origin, certification, sales volume or award information.",
@@ -118,7 +118,7 @@
       "duration_seconds": null,
       "status": "planned",
       "human_approval_required": true,
-      "generation_prompt": "Design a 9:16 short-video cover for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Style: warm, calm, credible. Anchor the visual to this approved fact: The gift box contains individually packed jasmine tea sachets.. Use one clear focal product, strong mobile hierarchy, reserved headline space, and realistic materials.",
+      "generation_prompt": "Design a 9:16 mobile cover for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. Brand voice: warm, calm, credible. Show one stable focal product and reserve readable headline space.",
       "negative_constraints": [
         "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
         "Do not invent origin, certification, sales volume or award information.",
@@ -143,6 +143,7 @@
       "human_approval_required": true,
       "voice_script": "Jasmine Tea Gift Box. The gift box contains individually packed jasmine tea sachets. Review the product details before choosing the tea that fits your routine.",
       "voice_direction": "Natural commercial read; warm, calm, credible; fit within 15 seconds; no synthetic celebrity imitation.",
+      "generation_prompt": "Prepare a 15-second voiceover for Jasmine Tea Gift Box. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. Tone: warm, calm, credible. End with: Review the product details before choosing the tea that fits your routine.",
       "negative_constraints": [
         "no unauthorized voice clone",
         "no exaggerated medical or financial claim"
@@ -156,6 +157,10 @@
       ]
     }
   ],
+  "prompt_template": {
+    "template_set_id": "retail-content-safe-v1",
+    "version": "1.0"
+  },
   "asset_manifest": [
     {
       "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
@@ -266,6 +271,11 @@
       "status": "completed"
     },
     {
+      "tool": "render_prompt_templates",
+      "purpose": "Render validated configurable templates without calling a provider.",
+      "status": "completed"
+    },
+    {
       "tool": "create_asset_manifest",
       "purpose": "Assign stable IDs and expected evidence to planned assets.",
       "status": "completed"
@@ -280,7 +290,7 @@
   "cost_boundary": "No model API or paid service was called by this public workflow.",
   "limitations": [
     "Prompts and shot plans are deterministic planning artifacts, not generated media.",
-    "Provider adapters, generated asset files and publishing integrations are not implemented.",
+    "Provider request envelopes are optional offline artifacts; no external provider execution is implemented.",
     "The local asset ledger records workflow evidence but is not a multi-user approval system.",
     "Platform compliance and commercial claims require an authorized human reviewer."
   ]

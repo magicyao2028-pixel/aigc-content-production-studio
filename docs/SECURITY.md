@@ -8,8 +8,11 @@
 - prohibited claims are carried into task constraints and review gates;
 - every deliverable and final release require human approval;
 - execution status remains `planned_not_generated`.
+- template placeholders are allowlisted and unsafe field access is rejected;
+- provider profiles reject unknown fields and cannot enable external execution;
+- provider request plans contain no credential or endpoint field and remain `prepared_not_sent`.
 
-## Risks not solved in v0.1
+## Risks not solved in v0.3
 
 - prompt injection in uploaded briefs or reference files;
 - storage and access control for private brand assets;

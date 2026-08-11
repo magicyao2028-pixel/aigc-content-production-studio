@@ -9,7 +9,10 @@ flowchart TB
     V -->|No| C[Return for clarification]
     V -->|Yes| S[Content strategy]
     S --> T[Video, image and voice tasks]
-    T --> M[Asset manifest]
+    T --> PT[Validated prompt templates]
+    PT --> M[Asset manifest]
+    M --> RP[Offline provider request plan]
+    RP --> WAIT[Prepared, not sent]
     M --> CAND[Generated candidate recorded]
     CAND --> F[Fact and claims review]
     F --> P[Brand, rights and privacy review]
@@ -30,4 +33,4 @@ flowchart TB
 
 The workflow never treats generation output as automatically approved. Rejected assets return to the task or brief that caused the problem.
 
-The v0.2 local ledger records each status change as a new event. It prevents `planned → approved_final` and other skipped-review transitions, but it does not authenticate the named actor; production approval still requires an authorized system and organizational control.
+The v0.3 workflow also validates prompt templates and provider capabilities before producing request envelopes. Those envelopes are planning artifacts only. The local ledger records each status change as a new event, but it does not authenticate the named actor; production approval still requires an authorized system and organizational control.

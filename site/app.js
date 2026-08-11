@@ -2,6 +2,7 @@ const workflowSteps = [
   ["Validate brief","Facts, constraints and formats"],
   ["Plan strategy","Objective, audience and message"],
   ["Build tasks","Video, image and voice"],
+  ["Render templates","Validated configurable instructions"],
   ["Create manifest","Stable IDs and evidence"],
   ["Attach gates","Human approval before release"]
 ];
@@ -31,6 +32,7 @@ const trace = [
   ["validate_brief","Validate product facts, constraints and deliverable specifications."],
   ["plan_content_strategy","Translate the business objective into a content direction."],
   ["build_multimodal_tasks","Create provider-neutral image, video and voice production tasks."],
+  ["render_prompt_templates","Render validated configurable templates without calling a provider."],
   ["create_asset_manifest","Assign stable IDs and expected evidence to planned assets."],
   ["attach_review_gates","Require factual, brand, rights, privacy and final human review."]
 ];
@@ -43,7 +45,7 @@ function renderPackage() {
       <div class="deliverable-head"><span class="type">${item.type}</span><span class="asset-id">${item.id}</span></div>
       <h3>${item.summary.split(" with ")[0]}</h3>
       <p>${item.summary}</p>
-      <div class="specs"><span>${item.ratio}</span><span>${item.duration}</span><span>Provider-neutral</span></div>
+      <div class="specs"><span>${item.ratio}</span><span>${item.duration}</span><span>Template v1.0</span></div>
       <div class="approval">Human approval required · status: planned</div>
     </article>`).join("");
   document.getElementById("lifecycle-list").innerHTML = lifecycle.map(([status,detail],index) => `

@@ -15,6 +15,7 @@
         <a class="active" href="#brief">Brief</a>
         <a href="#workflow">Workflow</a>
         <a href="#deliverables">Deliverables</a>
+        <a href="#adapter">Templates & adapter</a>
         <a href="#lifecycle">Asset lifecycle</a>
         <a href="#gates">Review gates</a>
         <a href="#trace">Trace</a>
@@ -62,6 +63,23 @@
         <div class="deliverable-grid" id="deliverable-list"></div>
       </section>
 
+      <section id="adapter" class="brief-card" aria-labelledby="adapter-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">CONFIGURABLE BUT NON-SENDING</p><h2 id="adapter-title">Templates and provider request plan</h2></div>
+          <span class="status planned">0 external calls</span>
+        </div>
+        <div class="brief-grid">
+          <div><span>Template set</span><strong>retail-content-safe-v1 · 1.0</strong></div>
+          <div><span>Provider profile</span><strong>offline-demo-adapter</strong></div>
+          <div><span>Requests</span><strong>3 prepared · none sent</strong></div>
+          <div><span>Approval</span><strong>Required before future execution</strong></div>
+        </div>
+        <div class="facts">
+          <article><span class="fact-label">VALIDATED</span><p>Task type, aspect ratio, duration and allowlisted prompt fields are checked before a request envelope is created.</p></article>
+          <article><span class="risk-label">BLOCKED</span><p>Unknown profile fields, embedded secrets, unsupported capabilities and external execution are rejected.</p></article>
+        </div>
+      </section>
+
       <section id="lifecycle" aria-labelledby="lifecycle-title">
         <div class="section-heading"><div><p class="eyebrow">VERSIONED LOCAL EVIDENCE</p><h2 id="lifecycle-title">Asset status lifecycle</h2></div><span class="count">No skipped review</span></div>
         <div class="lifecycle" id="lifecycle-list"></div>
@@ -78,7 +96,7 @@
         <ol class="trace-list" id="trace-list"><li>Waiting to build the package.</li></ol>
       </section>
 
-      <footer>v0.2 product-validation prototype · Local asset history · Synthetic brief · No paid API</footer>
+      <footer>v0.3 product-validation prototype · Configurable templates · Prepared, not sent · No paid API</footer>
     </main>
   </div>
   <script src="app.js"></script>

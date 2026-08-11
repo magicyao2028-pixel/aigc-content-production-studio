@@ -1,0 +1,9 @@
+{
+  "template_set_id": "retail-content-safe-v1",
+  "version": "1.0",
+  "templates": {
+    "short_video": "Create a {duration_seconds}-second {aspect_ratio} product video for {product_name}. Audience: {audience}. Brand voice: {brand_voice}. Use only these approved facts: {approved_facts}. End with the approved call to action: {call_to_action}. Keep identity, motion and text legible.",
+    "cover_image": "Design a {aspect_ratio} mobile cover for {product_name}. Audience: {audience}. Use only these approved facts: {approved_facts}. Brand voice: {brand_voice}. Show one stable focal product and reserve readable headline space.",
+    "voiceover": "Prepare a {duration_seconds}-second voiceover for {product_name}. Use only these approved facts: {approved_facts}. Tone: {brand_voice}. End with: {call_to_action}"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "provider_id": "offline-demo-adapter",
+  "display_name": "Offline Demonstration Adapter",
+  "supported_deliverables": ["short_video", "cover_image", "voiceover"],
+  "allowed_aspect_ratios": ["9:16", "16:9", "1:1"],
+  "max_duration_seconds": 60,
+  "external_execution_enabled": false
+}
