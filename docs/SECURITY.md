@@ -11,8 +11,10 @@
 - template placeholders are allowlisted and unsafe field access is rejected;
 - provider profiles reject unknown fields and cannot enable external execution;
 - provider request plans contain no credential or endpoint field and remain `prepared_not_sent`.
+- quality fixtures accept only `synthetic-fixture://` references and retain explicit evidence labels;
+- all six controlled failure categories block fixture release and require human review.
 
-## Risks not solved in v0.3
+## Risks not solved in v0.4
 
 - prompt injection in uploaded briefs or reference files;
 - storage and access control for private brand assets;
@@ -21,6 +23,7 @@
 - unsafe, deceptive or platform-prohibited output;
 - job retries that multiply cost or publish duplicate assets;
 - account takeover and unauthorized publishing.
+- automated detection accuracy for factual, visual, timing or rights failures in real media.
 
 ## Required controls before model or publishing integration
 

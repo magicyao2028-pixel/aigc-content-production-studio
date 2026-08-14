@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Product | AIGC Content Production Studio |
-| Version | 0.3 |
+| Version | 0.4 |
 | Status | Product-validation MVP |
 | Primary user | Content operations lead in a small or medium-sized business |
 | Public data policy | Synthetic brief and generated planning artifacts only |
@@ -18,7 +18,7 @@ Content teams frequently start production with an incomplete request. Product fa
 
 If one validated brief produces linked multimodal tasks, stable asset IDs and mandatory review gates, a content lead can coordinate AIGC production more consistently and identify missing facts before external generation begins.
 
-The public prototype has not been tested with real users. v0.3 validates workflow, template and request-preparation logic only.
+The public prototype has not been tested with real users. v0.4 validates workflow, template, request-preparation and synthetic review-fixture logic only.
 
 ## 4. Users and jobs to be done
 
@@ -36,7 +36,7 @@ The public prototype has not been tested with real users. v0.3 validates workflo
 - see who is responsible for each review gate;
 - prevent an unapproved asset from being published.
 
-## 5. v0.3 scope
+## 5. v0.4 scope
 
 ### In scope
 
@@ -53,6 +53,9 @@ The public prototype has not been tested with real users. v0.3 validates workflo
 11. Validate configurable prompt templates against an allowlist of business fields.
 12. Report the template-set identity and version in every package.
 13. Validate provider capabilities and prepare reviewable request envelopes without sending them.
+14. Validate an explicit six-category AIGC failure taxonomy.
+15. Evaluate manually labelled synthetic review cases against package asset IDs.
+16. Block fixture release when any controlled failure is present and retain evidence and ownership.
 
 ### Out of scope
 
@@ -62,6 +65,7 @@ The public prototype has not been tested with real users. v0.3 validates workflo
 - social account integrations and campaign analytics;
 - production permissions, queues, concurrency and monitoring;
 - claims of business performance or real client use.
+- automated media inspection, perceptual scoring or claims about generated-output quality.
 
 ## 6. Functional requirements
 
@@ -80,6 +84,9 @@ The public prototype has not been tested with real users. v0.3 validates workflo
 | FR-11 | Configure prompts safely | Must | Templates define all supported modalities and reject unsafe or unknown placeholders. |
 | FR-12 | Validate provider fit | Must | Unsupported type, ratio or duration fails before a request is prepared. |
 | FR-13 | Prevent external execution | Must | Public profiles cannot enable sending and every request records zero execution. |
+| FR-14 | Control failure labels | Must | Only the six documented categories are accepted and every category defines evidence, owner and release behavior. |
+| FR-15 | Bind review evidence | Must | Every review case references a known package asset and retains a non-empty observation and evidence record. |
+| FR-16 | Block failed candidates | Must | Any controlled failure produces a blocked decision while no-failure cases remain `pass_fixture_only`. |
 
 ## 7. Future product metrics
 
@@ -93,4 +100,4 @@ The public prototype has not been tested with real users. v0.3 validates workflo
 
 ## 8. Release gate
 
-Do not claim reduced production time, improved content quality, saved model cost or increased conversion until a controlled pilot compares a documented baseline with reviewed outcomes.
+Do not claim reduced production time, improved content quality, saved model cost or increased conversion until a controlled pilot compares a documented baseline with reviewed outcomes. A synthetic `pass_fixture_only` result is never approval of an actual media asset.

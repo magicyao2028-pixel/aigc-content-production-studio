@@ -17,6 +17,7 @@
         <a href="#deliverables">Deliverables</a>
         <a href="#adapter">Templates & adapter</a>
         <a href="#lifecycle">Asset lifecycle</a>
+        <a href="#quality">Quality fixture</a>
         <a href="#gates">Review gates</a>
         <a href="#trace">Trace</a>
       </nav>
@@ -91,12 +92,18 @@
         <div class="gate-grid" id="gate-list"></div>
       </section>
 
+      <section id="quality" aria-labelledby="quality-title">
+        <div class="section-heading"><div><p class="eyebrow">OFFLINE FAILURE GOVERNANCE</p><h2 id="quality-title">Six-category quality fixture</h2></div><span class="count">7 synthetic cases · 6 blocked</span></div>
+        <div class="gate-grid" id="quality-list"></div>
+        <p class="lifecycle-note">100% taxonomy coverage means each deterministic branch is exercised once. No media was generated or inspected, and the single pass record is fixture-only—not asset approval.</p>
+      </section>
+
       <section id="trace" aria-labelledby="trace-title">
         <div class="section-heading"><div><p class="eyebrow">AUDITABLE ORCHESTRATION</p><h2 id="trace-title">Execution trace</h2></div></div>
         <ol class="trace-list" id="trace-list"><li>Waiting to build the package.</li></ol>
       </section>
 
-      <footer>v0.3 product-validation prototype · Configurable templates · Prepared, not sent · No paid API</footer>
+      <footer>v0.4 product-validation prototype · Offline quality taxonomy · Prepared, not sent · No paid API</footer>
     </main>
   </div>
   <script src="app.js"></script>

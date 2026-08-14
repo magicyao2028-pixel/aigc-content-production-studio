@@ -1,0 +1,47 @@
+{
+  "taxonomy_version": "1.0",
+  "categories": [
+    {
+      "category": "factual_drift",
+      "definition": "Candidate content adds, removes or changes a fact relative to the approved brief.",
+      "evidence_required": "Approved fact and the conflicting frame, transcript or request field.",
+      "owner": "Product / Operations",
+      "release_blocking": true
+    },
+    {
+      "category": "identity_instability",
+      "definition": "A product, character, package or brand identifier changes unintentionally across the candidate.",
+      "evidence_required": "Reference asset plus the mismatched frame or region.",
+      "owner": "Content Lead",
+      "release_blocking": true
+    },
+    {
+      "category": "unreadable_text",
+      "definition": "Required on-screen copy, packaging text or call to action cannot be read at the target display size.",
+      "evidence_required": "Target-size preview and the unreadable text region.",
+      "owner": "Content Lead",
+      "release_blocking": true
+    },
+    {
+      "category": "timing_mismatch",
+      "definition": "Speech, shot, action or caption timing does not satisfy the approved duration or synchronization plan.",
+      "evidence_required": "Expected timing and observed timestamp or measured duration.",
+      "owner": "Content Producer",
+      "release_blocking": true
+    },
+    {
+      "category": "rights_risk",
+      "definition": "The candidate may use an unapproved likeness, voice, trademark, copyrighted work or personal information.",
+      "evidence_required": "Flagged element and the missing or insufficient permission record.",
+      "owner": "Business Owner",
+      "release_blocking": true
+    },
+    {
+      "category": "provider_rejection",
+      "definition": "A provider or offline adapter rejects the request because of policy, capability, format or parameter constraints.",
+      "evidence_required": "Provider status or adapter error plus the rejected request field.",
+      "owner": "AI Application Operator",
+      "release_blocking": true
+    }
+  ]
+}

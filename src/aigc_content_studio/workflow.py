@@ -39,7 +39,7 @@ class ContentProductionWorkflow:
         trace.record("attach_review_gates", "Require factual, brand, rights, privacy and final human review.")
 
         return {
-            "package_version": "0.3",
+            "package_version": "0.4",
             "campaign_id": brief.campaign_id,
             "brief": brief.to_dict(),
             "strategy": strategy,

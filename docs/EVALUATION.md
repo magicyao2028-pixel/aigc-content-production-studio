@@ -14,9 +14,18 @@ Evaluate whether the workflow creates a complete, fact-constrained and reviewabl
 - the package contains five mandatory review gates;
 - no output claims that media has been generated.
 
-## Future package-quality fixture
+## Current offline package-quality fixture
 
-Create at least 30 reviewed synthetic briefs covering product video, brand content, promotional content and risky-claim scenarios.
+The v0.4 fixture contains seven synthetic manually labelled review cases bound to the sample package:
+
+- one `pass_fixture_only` record with no labelled failure;
+- six blocked records, one for each controlled category;
+- retained observation, evidence, severity, accountable owner and release decision;
+- zero external calls and no real-media inspection.
+
+The fixture reports 100% taxonomy coverage because each category appears once. This is branch coverage for the evaluator, not output-quality accuracy.
+
+Future work should expand to at least 30 independently reviewed cases covering product video, brand content, promotional content and risky-claim scenarios.
 
 Measure:
 

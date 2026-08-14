@@ -1,0 +1,97 @@
+{
+  "fixture_version": "1.0",
+  "fixture_type": "synthetic_manually_labelled_reviews",
+  "cases": [
+    {
+      "case_id": "QF-PASS-001",
+      "asset_id": "CMP-TEA-001-02-COVER_IMAGE",
+      "asset_type": "cover_image",
+      "candidate_reference": "synthetic-fixture://cover/reviewed-no-labelled-failure",
+      "failures": []
+    },
+    {
+      "case_id": "QF-FACT-001",
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "asset_type": "short_video",
+      "candidate_reference": "synthetic-fixture://video/invented-origin-claim",
+      "failures": [
+        {
+          "category": "factual_drift",
+          "severity": "critical",
+          "evidence": "Synthetic transcript says the tea won a national award; the approved brief contains no award fact.",
+          "observation": "The candidate introduces an unsupported award claim."
+        }
+      ]
+    },
+    {
+      "case_id": "QF-IDENTITY-001",
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "asset_type": "short_video",
+      "candidate_reference": "synthetic-fixture://video/package-colour-shift",
+      "failures": [
+        {
+          "category": "identity_instability",
+          "severity": "high",
+          "evidence": "Synthetic frame note records the gift box changing from green to red between shots 1 and 2.",
+          "observation": "Product packaging identity is not stable across the planned sequence."
+        }
+      ]
+    },
+    {
+      "case_id": "QF-TEXT-001",
+      "asset_id": "CMP-TEA-001-02-COVER_IMAGE",
+      "asset_type": "cover_image",
+      "candidate_reference": "synthetic-fixture://cover/illegible-cta",
+      "failures": [
+        {
+          "category": "unreadable_text",
+          "severity": "high",
+          "evidence": "Synthetic mobile preview note marks the call to action as blurred at 360-pixel width.",
+          "observation": "Required call-to-action copy is unreadable at the target display size."
+        }
+      ]
+    },
+    {
+      "case_id": "QF-TIMING-001",
+      "asset_id": "CMP-TEA-001-03-VOICEOVER",
+      "asset_type": "voiceover",
+      "candidate_reference": "synthetic-fixture://voice/duration-overrun",
+      "failures": [
+        {
+          "category": "timing_mismatch",
+          "severity": "high",
+          "evidence": "Synthetic measurement is 18.4 seconds against the approved 15-second duration.",
+          "observation": "The voiceover exceeds the delivery duration by 3.4 seconds."
+        }
+      ]
+    },
+    {
+      "case_id": "QF-RIGHTS-001",
+      "asset_id": "CMP-TEA-001-03-VOICEOVER",
+      "asset_type": "voiceover",
+      "candidate_reference": "synthetic-fixture://voice/unapproved-imitation",
+      "failures": [
+        {
+          "category": "rights_risk",
+          "severity": "critical",
+          "evidence": "Synthetic review note identifies a requested celebrity-style imitation with no permission record.",
+          "observation": "The proposed voice identity lacks an approved rights basis."
+        }
+      ]
+    },
+    {
+      "case_id": "QF-PROVIDER-001",
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "asset_type": "short_video",
+      "candidate_reference": "synthetic-fixture://provider/unsupported-duration",
+      "failures": [
+        {
+          "category": "provider_rejection",
+          "severity": "high",
+          "evidence": "Synthetic adapter response rejects 15 seconds because the selected profile limit is 10 seconds.",
+          "observation": "The prepared request exceeds the declared provider duration capability."
+        }
+      ]
+    }
+  ]
+}

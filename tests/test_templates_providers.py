@@ -34,7 +34,7 @@ class PromptTemplateTests(unittest.TestCase):
         package = ContentProductionWorkflow(templates).run(load_brief(BRIEF))
         video = next(item for item in package["deliverables"] if item["type"] == "short_video")
 
-        self.assertEqual(package["package_version"], "0.3")
+        self.assertEqual(package["package_version"], "0.4")
         self.assertEqual(package["prompt_template"], {"template_set_id": "retail-content-safe-v1", "version": "1.0"})
         self.assertIn("approved call to action", video["generation_prompt"])
         self.assertIn("Jasmine Tea Gift Box", video["generation_prompt"])

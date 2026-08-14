@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 - 2026-08-14
+
+- added a controlled taxonomy for factual drift, identity instability, unreadable text, timing mismatch, rights risk and provider rejection;
+- added a seven-case manually labelled synthetic fixture bound to sample-package asset IDs;
+- added release-blocking decisions, evidence retention, ownership and severity summaries;
+- added an offline quality CLI and reproducible report with zero external calls;
+- added seven focused tests and explicit boundaries against claiming real generated-media quality.
+
 ## 0.3.0 - 2026-08-11
 
 - added validated, configurable prompt-template sets for video, image and voice tasks;

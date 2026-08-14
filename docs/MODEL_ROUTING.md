@@ -1,8 +1,8 @@
 # Model-Routing Boundary
 
-## v0.3 behavior
+## v0.4 behavior
 
-The repository produces provider-neutral tasks, validates prompt templates and can build offline request envelopes. It does not call or benchmark any model.
+The repository produces provider-neutral tasks, validates prompt templates, builds offline request envelopes and evaluates synthetic quality labels. It does not call, inspect or benchmark any model output.
 
 | Task type | Required capability | Evidence to preserve later |
 | --- | --- | --- |

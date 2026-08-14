@@ -14,11 +14,14 @@ flowchart TB
     M --> RP[Offline provider request plan]
     RP --> WAIT[Prepared, not sent]
     M --> CAND[Generated candidate recorded]
-    CAND --> F[Fact and claims review]
+    CAND --> Q[Record taxonomy-labelled quality evidence]
+    Q --> F[Fact and claims review]
     F --> P[Brand, rights and privacy review]
-    P --> A{Final human approval}
-    A -->|Approved| X[Approved final recorded]
-    A -->|Changes requested| CAND
+    P --> A{Any blocking failure?}
+    A -->|Yes| CAND
+    A -->|No| H{Final human approval}
+    H -->|Approved| X[Approved final recorded]
+    H -->|Changes requested| CAND
 ```
 
 ## Role boundaries
@@ -33,4 +36,4 @@ flowchart TB
 
 The workflow never treats generation output as automatically approved. Rejected assets return to the task or brief that caused the problem.
 
-The v0.3 workflow also validates prompt templates and provider capabilities before producing request envelopes. Those envelopes are planning artifacts only. The local ledger records each status change as a new event, but it does not authenticate the named actor; production approval still requires an authorized system and organizational control.
+The v0.4 workflow also validates prompt templates and provider capabilities before producing request envelopes. Those envelopes are planning artifacts only. Its checked-in quality cases are synthetic review records used to validate taxonomy behavior, not generated candidates. The local ledger records each status change as a new event, but it does not authenticate the named actor; production approval still requires an authorized system and organizational control.

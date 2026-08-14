@@ -6,7 +6,7 @@ The initial repository is intentionally limited. Each round must add implementat
 | --- | --- | --- |
 | M1 | Asset status transitions and version history | Complete |
 | M2 | Configurable prompt templates and provider-adapter interfaces | Complete in v0.3.0 |
-| M3 | Package-quality fixture and failure taxonomy | Planned |
+| M3 | Package-quality fixture and failure taxonomy | Complete in v0.4.0 |
 | M4 | Cost, quota and provider-routing policy | Planned |
 | M5 | Brief extraction and structured clarification loop | Planned |
 | M6 | Optional zero-cost/local model adapter experiment | Planned |

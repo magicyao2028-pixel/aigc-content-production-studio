@@ -28,6 +28,15 @@ const lifecycle = [
   ["approved_final","Authorized human approval recorded"]
 ];
 
+const qualityFailures = [
+  ["FACTUAL DRIFT","Unsupported or changed approved fact","Product / Operations"],
+  ["IDENTITY INSTABILITY","Product or package changes across a candidate","Content Lead"],
+  ["UNREADABLE TEXT","Required copy fails at target display size","Content Lead"],
+  ["TIMING MISMATCH","Duration or synchronization misses the plan","Content Producer"],
+  ["RIGHTS RISK","Permission record is absent or insufficient","Business Owner"],
+  ["PROVIDER REJECTION","Capability, policy, format or parameter rejected","AI Application Operator"]
+];
+
 const trace = [
   ["validate_brief","Validate product facts, constraints and deliverable specifications."],
   ["plan_content_strategy","Translate the business objective into a content direction."],
@@ -52,6 +61,8 @@ function renderPackage() {
     <article class="lifecycle-step"><span>v${index + 1}</span><strong>${status}</strong><small>${detail}</small></article>`).join("");
   document.getElementById("gate-list").innerHTML = gates.map(([gate,owner]) => `
     <article class="gate"><strong>${gate}</strong><span>Owner: ${owner}<br>Required before external release</span></article>`).join("");
+  document.getElementById("quality-list").innerHTML = qualityFailures.map(([category,detail,owner]) => `
+    <article class="gate"><strong>${category}</strong><span>${detail}<br>Owner: ${owner} · release blocked</span></article>`).join("");
   document.getElementById("trace-list").innerHTML = trace.map(([tool,purpose]) => `<li><strong>${tool}</strong> — ${purpose} <small>(completed)</small></li>`).join("");
   document.getElementById("run-status").textContent = "Planned · not generated";
 }
