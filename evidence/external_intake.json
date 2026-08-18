@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "reviewed_on": "2026-08-18",
+  "candidates": [
+    {
+      "repository": "https://github.com/BerriAI/litellm",
+      "version": "v1.97.0",
+      "commit": "ef84494d52c6708e4e9f4a54ce551a265995ad8f",
+      "license": "Other in GitHub metadata; not accepted as compatible for this bounded review",
+      "decision": "rejected",
+      "code_adopted": false,
+      "reason": "The repository targets live multi-provider model routing and adds network, credential and licensing scope that the non-sending offline preflight deliberately excludes."
+    },
+    {
+      "repository": "https://github.com/AgentOps-AI/tokencost",
+      "version": "0.1.26",
+      "commit": "98c949fe546979e55c0ed0597b79a11599f95670",
+      "license": "MIT",
+      "decision": "rejected",
+      "code_adopted": false,
+      "reason": "Token-price estimation adds no net value when this repository executes no model, counts no tokens and uses explicitly non-currency abstract planning units."
+    }
+  ]
+}

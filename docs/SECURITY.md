@@ -11,6 +11,7 @@
 - template placeholders are allowlisted and unsafe field access is rejected;
 - provider profiles reject unknown fields and cannot enable external execution;
 - provider request plans contain no credential or endpoint field and remain `prepared_not_sent`.
+- routing policies use non-currency abstract units, enforce request and unit ceilings, and emit no partial envelopes when blocked;
 - quality fixtures accept only `synthetic-fixture://` references and retain explicit evidence labels;
 - all six controlled failure categories block fixture release and require human review.
 
@@ -24,6 +25,7 @@
 - job retries that multiply cost or publish duplicate assets;
 - account takeover and unauthorized publishing.
 - automated detection accuracy for factual, visual, timing or rights failures in real media.
+- current provider pricing, billing, regional availability and live quota enforcement.
 
 ## Required controls before model or publishing integration
 
@@ -34,3 +36,5 @@
 5. Enforce quotas, timeouts, idempotency and a manual publishing gate.
 6. Define retention, deletion, incident-response and copyright-takedown procedures.
 7. Verify current provider terms and commercial rights before every integration release.
+
+Abstract routing cost units are not prices, tokens or spend approval. Connecting this public preflight to provider execution requires a separate authenticated service, current terms review, monetary budget control and accountable approval.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 - 2026-08-18
+
+- added strict abstract cost-unit and request-quota policy validation;
+- added an atomic non-sending routing preflight that emits no envelopes when a limit is exceeded;
+- screened LiteLLM v1.97.0 and TokenCost 0.1.26 without forcing dependencies that add no value to the offline boundary;
+- converted a clearly synthetic atomic-quota requirement into implementation and regression evidence;
+- added a seven-claim evidence index, reviewer trial, deterministic report and honest real-pilot boundary.
+
 ## 0.4.0 - 2026-08-14
 
 - added a controlled taxonomy for factual drift, identity instability, unreadable text, timing mismatch, rights risk and provider rejection;

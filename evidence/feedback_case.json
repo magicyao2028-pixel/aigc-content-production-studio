@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "feedback_id": "FB-AIGC-SYN-001",
+  "source_type": "synthetic",
+  "recorded_on": "2026-08-18",
+  "classification": "requirement",
+  "summary": "A package above a reviewed request quota must fail atomically instead of leaving partial provider envelopes that look executable.",
+  "reproduction": "Apply a two-request limit to the three-deliverable synthetic campaign package.",
+  "decision": "accepted",
+  "acceptance_test": "tests/test_routing.py",
+  "implementation": "src/aigc_content_studio/routing.py",
+  "release_result": "The routing preflight returns blocked, records the quota reason, emits zero request envelopes and executes zero external calls.",
+  "adoption_claim": "Synthetic requirement case only; not real operator feedback, provider usage or production adoption."
+}

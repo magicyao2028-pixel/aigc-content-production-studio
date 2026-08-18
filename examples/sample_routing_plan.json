@@ -1,0 +1,85 @@
+{
+  "campaign_id": "CMP-TEA-001",
+  "provider_id": "offline-demo-adapter",
+  "routing_policy": {
+    "policy_id": "offline-review-budget-v1",
+    "version": "1.0",
+    "max_requests_per_run": 3,
+    "max_total_cost_units": 8,
+    "cost_units_by_deliverable": {
+      "short_video": 5,
+      "cover_image": 2,
+      "voiceover": 1
+    }
+  },
+  "request_count": 3,
+  "estimated_cost_units": 8,
+  "cost_unit_boundary": "Abstract planning units only; not currency, tokens, provider price or a quote.",
+  "external_calls_executed": 0,
+  "human_approval_required": true,
+  "routing_status": "eligible_for_human_review",
+  "reasons": [],
+  "requests": [
+    {
+      "request_id": "REQ-CMP-TEA-001-01-SHORT_VIDEO-offline-demo-adapter",
+      "provider_id": "offline-demo-adapter",
+      "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+      "deliverable_type": "short_video",
+      "payload": {
+        "prompt": "Create a 15-second 9:16 product video for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Brand voice: warm, calm, credible. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. End with the approved call to action: Review the product details before choosing the tea that fits your routine.. Keep identity, motion and text legible.",
+        "aspect_ratio": "9:16",
+        "duration_seconds": 15,
+        "negative_constraints": [
+          "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
+          "Do not invent origin, certification, sales volume or award information.",
+          "no invented packaging details",
+          "no unstable product appearance",
+          "no unreadable overlay text"
+        ]
+      },
+      "execution_status": "prepared_not_sent",
+      "external_call_executed": false,
+      "human_approval_required": true
+    },
+    {
+      "request_id": "REQ-CMP-TEA-001-02-COVER_IMAGE-offline-demo-adapter",
+      "provider_id": "offline-demo-adapter",
+      "asset_id": "CMP-TEA-001-02-COVER_IMAGE",
+      "deliverable_type": "cover_image",
+      "payload": {
+        "prompt": "Design a 9:16 mobile cover for Jasmine Tea Gift Box. Audience: urban office workers who value a calm tea break. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. Brand voice: warm, calm, credible. Show one stable focal product and reserve readable headline space.",
+        "aspect_ratio": "9:16",
+        "duration_seconds": null,
+        "negative_constraints": [
+          "Do not claim medical effects, guaranteed sleep improvement or disease treatment.",
+          "Do not invent origin, certification, sales volume or award information.",
+          "no duplicate product",
+          "no distorted logo or packaging",
+          "no dense unreadable copy"
+        ]
+      },
+      "execution_status": "prepared_not_sent",
+      "external_call_executed": false,
+      "human_approval_required": true
+    },
+    {
+      "request_id": "REQ-CMP-TEA-001-03-VOICEOVER-offline-demo-adapter",
+      "provider_id": "offline-demo-adapter",
+      "asset_id": "CMP-TEA-001-03-VOICEOVER",
+      "deliverable_type": "voiceover",
+      "payload": {
+        "prompt": "Prepare a 15-second voiceover for Jasmine Tea Gift Box. Use only these approved facts: The gift box contains individually packed jasmine tea sachets.; The public sample positions the product for convenient office brewing.. Tone: warm, calm, credible. End with: Review the product details before choosing the tea that fits your routine.",
+        "aspect_ratio": "9:16",
+        "duration_seconds": 15,
+        "negative_constraints": [
+          "no unauthorized voice clone",
+          "no exaggerated medical or financial claim"
+        ]
+      },
+      "execution_status": "prepared_not_sent",
+      "external_call_executed": false,
+      "human_approval_required": true
+    }
+  ],
+  "approval_gate": "An authorized human must approve each request before any future external adapter sends it."
+}

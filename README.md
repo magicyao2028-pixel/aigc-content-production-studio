@@ -23,6 +23,7 @@ Small content teams often move directly from a chat message to image, video and 
 - attaches stable asset IDs and expected evidence;
 - enforces explicit asset status transitions and preserves a local event history;
 - evaluates a manually labelled offline fixture against a six-category failure taxonomy;
+- applies an atomic request-quota and abstract cost-unit routing preflight before provider envelopes are prepared;
 - requires factual, brand, rights, privacy and release review;
 - works offline without calling a paid model API.
 
@@ -68,6 +69,8 @@ aigc-provider-plan output/production_package.json data/offline_provider_profile.
 aigc-assets initialize output/production_package.json output/asset_history.json
 aigc-assets transition output/asset_history.json CMP-TEA-001-01-SHORT_VIDEO generated_candidate --actor content-operator --note "Candidate file recorded"
 aigc-quality output/production_package.json data/failure_taxonomy.json data/quality_fixture.json output/quality_report.json
+aigc-route output/production_package.json data/offline_provider_profile.json data/routing_policy.json output/routing_plan.json
+aigc-studio-trial
 python -m unittest discover -s tests -v
 ```
 
@@ -103,6 +106,8 @@ Then visit `http://localhost:8000`.
 
 [`examples/sample_quality_report.json`](examples/sample_quality_report.json) evaluates seven manually labelled synthetic review cases. Six cases each exercise one controlled failure category and are blocked; one record has no labelled failure and is marked `pass_fixture_only`. This proves taxonomy and release-gate behavior, not generated-media quality.
 
+[`examples/sample_routing_plan.json`](examples/sample_routing_plan.json) applies a reviewed three-request limit and eight abstract cost units to the sample package. The units are deliberately not currency, tokens, provider pricing or a quote. Exceeding either limit blocks atomically and emits no provider envelopes.
+
 ## Failure taxonomy
 
 | Category | What it catches | Release owner |
@@ -122,6 +127,7 @@ The tasks are provider-neutral. Template files may change wording and structure 
 
 - No media asset is generated or inspected in v0.4.
 - No model API, paid service or cloud compute is used.
+- Routing cost units are synthetic planning weights, not current provider prices or budget approval.
 - Prompts are deterministic planning artifacts, not proof of output quality.
 - Synthetic review labels prove only evaluator behavior; `pass_fixture_only` is not media approval.
 - Local JSON history is single-user evidence, not durable multi-user persistence, authentication or an approval system.
@@ -141,6 +147,10 @@ The tasks are provider-neutral. Template files may change wording and structure 
 - [Maintenance plan](docs/MAINTENANCE_PLAN.md)
 - [Current handoff](HANDOFF.md)
 - [Changelog](CHANGELOG.md)
+- [Reviewer trial guide](docs/TRIAL_GUIDE.md)
+- [Machine-readable evidence index](evidence/evidence_index.json)
+- [External component screening](evidence/external_intake.json)
+- [Synthetic feedback case](evidence/feedback_case.json)
 
 ## Roadmap
 
@@ -148,7 +158,7 @@ The tasks are provider-neutral. Template files may change wording and structure 
 - v0.2: asset status transitions and local version history;
 - v0.3: configurable prompt templates and non-sending provider adapters;
 - v0.4: offline quality fixture and six-category failure taxonomy (current);
-- v0.5: cost, quota and provider-routing policy;
+- v0.5: cost-unit, quota and provider-routing preflight plus reviewer trial evidence (current);
 - v0.6: optional zero-cost/local model adapter experiments;
 - v1.0: controlled private pilot with approved assets and measured workflow outcomes.
 
