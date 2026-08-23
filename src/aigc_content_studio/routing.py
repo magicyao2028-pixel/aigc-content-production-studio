@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 from .brief import SUPPORTED_DELIVERABLES
 from .providers import ProviderAdapter, build_provider_request_plan
@@ -84,6 +84,45 @@ def load_routing_policy(path: Path) -> RoutingPolicy:
     if not isinstance(payload, dict):
         raise ValueError("Routing policy must contain a JSON object")
     return RoutingPolicy.from_mapping(payload)
+
+
+def compare_routing_policies(
+    package: dict[str, Any], adapter: ProviderAdapter, policies: Iterable[RoutingPolicy]
+) -> dict[str, Any]:
+    """Compare reviewed routing policies without sending provider requests."""
+    comparisons: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for policy in policies:
+        identity = (policy.policy_id, policy.version)
+        if identity in seen:
+            raise ValueError("Routing policy identities must be unique")
+        seen.add(identity)
+        plan = build_guarded_request_plan(package, adapter, policy)
+        comparisons.append(
+            {
+                "policy_id": policy.policy_id,
+                "version": policy.version,
+                "routing_status": plan["routing_status"],
+                "request_count": plan["request_count"],
+                "estimated_cost_units": plan["estimated_cost_units"],
+                "reasons": plan["reasons"],
+                "prepared_requests": len(plan["requests"]),
+                "external_calls_executed": plan["external_calls_executed"],
+            }
+        )
+    if not comparisons:
+        raise ValueError("At least one routing policy is required")
+    return {
+        "comparison_type": "synthetic offline routing policy comparison",
+        "provider_id": adapter.provider_id,
+        "external_calls_executed": 0,
+        "policies": comparisons,
+        "interpretation": [
+            "Abstract cost units are planning weights, not currency, tokens or provider prices.",
+            "Eligibility means a request plan can be prepared for human review; it never authorizes a provider call.",
+            "Policy comparison is fixture evidence and does not predict provider availability or commercial cost.",
+        ],
+    }
 
 
 def build_guarded_request_plan(

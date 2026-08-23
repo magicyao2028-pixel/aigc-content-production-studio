@@ -9,7 +9,8 @@
     "request_count": 3,
     "estimated_cost_units": 8,
     "quality_blocked_cases": 6,
-    "external_calls_executed": 0
+    "external_calls_executed": 0,
+    "policy_comparison_count": 3
   },
   "feedback_regression": {
     "feedback_id": "FB-AIGC-SYN-001",
@@ -19,6 +20,51 @@
     "prepared_requests": 0,
     "reasons": [
       "request count 3 exceeds policy limit 2"
+    ]
+  },
+  "routing_comparison": {
+    "comparison_type": "synthetic offline routing policy comparison",
+    "provider_id": "offline-demo-adapter",
+    "external_calls_executed": 0,
+    "policies": [
+      {
+        "policy_id": "offline-review-budget-v1",
+        "version": "1.0",
+        "routing_status": "eligible_for_human_review",
+        "request_count": 3,
+        "estimated_cost_units": 8,
+        "reasons": [],
+        "prepared_requests": 3,
+        "external_calls_executed": 0
+      },
+      {
+        "policy_id": "conservative-review-budget-v1",
+        "version": "1.0",
+        "routing_status": "blocked",
+        "request_count": 3,
+        "estimated_cost_units": 8,
+        "reasons": [
+          "request count 3 exceeds policy limit 2",
+          "estimated abstract cost 8 exceeds policy limit 7"
+        ],
+        "prepared_requests": 0,
+        "external_calls_executed": 0
+      },
+      {
+        "policy_id": "expanded-review-budget-v1",
+        "version": "1.0",
+        "routing_status": "eligible_for_human_review",
+        "request_count": 3,
+        "estimated_cost_units": 8,
+        "reasons": [],
+        "prepared_requests": 3,
+        "external_calls_executed": 0
+      }
+    ],
+    "interpretation": [
+      "Abstract cost units are planning weights, not currency, tokens or provider prices.",
+      "Eligibility means a request plan can be prepared for human review; it never authorizes a provider call.",
+      "Policy comparison is fixture evidence and does not predict provider availability or commercial cost."
     ]
   },
   "external_intake": [
@@ -57,6 +103,15 @@
         "tests/test_routing.py",
         "tests/test_quality.py",
         "src/aigc_content_studio/trial.py"
+      ],
+      "passed": true
+    },
+    {
+      "claim_id": "AIGC-ROUTING-001",
+      "artifact_paths": [
+        "src/aigc_content_studio/routing.py",
+        "data/routing_policy_variants.json",
+        "reports/trial_report.json"
       ],
       "passed": true
     },

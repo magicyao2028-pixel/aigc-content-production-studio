@@ -1,0 +1,35 @@
+[
+  {
+    "policy_id": "offline-review-budget-v1",
+    "version": "1.0",
+    "max_requests_per_run": 3,
+    "max_total_cost_units": 8,
+    "cost_units_by_deliverable": {
+      "short_video": 5,
+      "cover_image": 2,
+      "voiceover": 1
+    }
+  },
+  {
+    "policy_id": "conservative-review-budget-v1",
+    "version": "1.0",
+    "max_requests_per_run": 2,
+    "max_total_cost_units": 7,
+    "cost_units_by_deliverable": {
+      "short_video": 5,
+      "cover_image": 2,
+      "voiceover": 1
+    }
+  },
+  {
+    "policy_id": "expanded-review-budget-v1",
+    "version": "1.0",
+    "max_requests_per_run": 4,
+    "max_total_cost_units": 10,
+    "cost_units_by_deliverable": {
+      "short_video": 5,
+      "cover_image": 2,
+      "voiceover": 1
+    }
+  }
+]

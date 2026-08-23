@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0 - 2026-08-23
+
+- added a deterministic offline comparison of reviewed routing-policy variants;
+- reported eligibility, request count, abstract cost units, prepared-envelope count and zero external calls for each policy;
+- preserved atomic blocking when a policy exceeds request or abstract-unit limits;
+- added regression coverage and a machine-readable trial evidence claim for policy comparison.
+
 ## 0.5.0 - 2026-08-18
 
 - added strict abstract cost-unit and request-quota policy validation;

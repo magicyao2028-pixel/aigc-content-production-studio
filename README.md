@@ -26,6 +26,7 @@ Small content teams often move directly from a chat message to image, video and 
 - applies an atomic request-quota and abstract cost-unit routing preflight before provider envelopes are prepared;
 - requires factual, brand, rights, privacy and release review;
 - works offline without calling a paid model API.
+- compares reviewed routing policies offline before any provider envelope is prepared.
 
 ## What this repository demonstrates
 
@@ -157,9 +158,9 @@ The tasks are provider-neutral. Template files may change wording and structure 
 - v0.1: validated brief, multimodal task package, asset IDs, review gates, tests and static demo;
 - v0.2: asset status transitions and local version history;
 - v0.3: configurable prompt templates and non-sending provider adapters;
-- v0.4: offline quality fixture and six-category failure taxonomy (current);
-- v0.5: cost-unit, quota and provider-routing preflight plus reviewer trial evidence (current);
-- v0.6: optional zero-cost/local model adapter experiments;
+- v0.4: offline quality fixture and six-category failure taxonomy;
+- v0.5: cost-unit, quota and provider-routing preflight plus reviewer trial evidence;
+- v0.6: offline comparison of reviewed routing-policy variants with zero-send guarantees (current);
 - v1.0: controlled private pilot with approved assets and measured workflow outcomes.
 
 ## License

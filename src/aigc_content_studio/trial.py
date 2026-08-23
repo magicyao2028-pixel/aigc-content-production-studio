@@ -10,7 +10,7 @@ from typing import Any
 from .brief import load_brief
 from .providers import OfflineProviderAdapter, load_provider_profile
 from .quality import evaluate_quality_files
-from .routing import build_guarded_request_plan, load_routing_policy
+from .routing import RoutingPolicy, build_guarded_request_plan, compare_routing_policies, load_routing_policy
 from .templates import load_template_set
 from .workflow import ContentProductionWorkflow
 
@@ -114,6 +114,11 @@ def run_trial(root: Path) -> dict[str, Any]:
     )
     adapter = OfflineProviderAdapter(load_provider_profile(root / "data" / "offline_provider_profile.json"))
     policy = load_routing_policy(root / "data" / "routing_policy.json")
+    variant_payload = json.loads((root / "data" / "routing_policy_variants.json").read_text(encoding="utf-8"))
+    if not isinstance(variant_payload, list):
+        raise ValueError("routing_policy_variants.json must contain a list")
+    variants = [RoutingPolicy.from_mapping(item) for item in variant_payload]
+    routing_comparison = compare_routing_policies(package, adapter, variants)
     routing = build_guarded_request_plan(package, adapter, policy)
     quality = evaluate_quality_files(
         root / "examples" / "sample_production_package.json",
@@ -138,6 +143,8 @@ def run_trial(root: Path) -> dict[str, Any]:
     }
     all_checks = [
         core_passed,
+        len(routing_comparison["policies"]) == 3
+        and routing_comparison["external_calls_executed"] == 0,
         feedback_regression["passed"],
         all(item["passed"] for item in external_checks),
         all(item["passed"] for item in evidence_checks),
@@ -154,8 +161,10 @@ def run_trial(root: Path) -> dict[str, Any]:
             "estimated_cost_units": routing["estimated_cost_units"],
             "quality_blocked_cases": quality["summary"]["blocked_cases"],
             "external_calls_executed": 0,
+            "policy_comparison_count": len(routing_comparison["policies"]),
         },
         "feedback_regression": feedback_regression,
+        "routing_comparison": routing_comparison,
         "external_intake": external_checks,
         "evidence_index": evidence_checks,
         "boundaries": manifest["boundaries"],
@@ -171,8 +180,19 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Overall: **{'PASS' if report['overall_passed'] else 'FAIL'}**",
         f"- End-to-end planning and routing: {'PASS' if report['core_flow']['passed'] else 'FAIL'}",
         f"- Atomic quota-block regression: {'PASS' if report['feedback_regression']['passed'] else 'FAIL'}",
+        f"- Routing-policy comparison: {'PASS' if report['routing_comparison']['external_calls_executed'] == 0 else 'FAIL'}",
         f"- Evidence claims checked: {len(report['evidence_index'])}",
         f"- External candidates screened: {len(report['external_intake'])}",
+        "",
+        "## Routing-policy comparison",
+        "",
+        "| Policy | Status | Requests | Abstract units | Prepared envelopes |",
+        "| --- | --- | --- | --- | --- |",
+        *[
+            f"| `{item['policy_id']}@{item['version']}` | {item['routing_status']} | "
+            f"{item['request_count']} | {item['estimated_cost_units']} | {item['prepared_requests']} |"
+            for item in report["routing_comparison"]["policies"]
+        ],
         "",
         "## Pilot boundary",
         "",

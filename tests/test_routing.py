@@ -4,7 +4,12 @@ from dataclasses import replace
 from pathlib import Path
 
 from aigc_content_studio import ContentProductionWorkflow, OfflineProviderAdapter, load_brief, load_provider_profile
-from aigc_content_studio.routing import RoutingPolicy, build_guarded_request_plan, load_routing_policy
+from aigc_content_studio.routing import (
+    RoutingPolicy,
+    build_guarded_request_plan,
+    compare_routing_policies,
+    load_routing_policy,
+)
 
 
 ROOT = Path(__file__).parents[1]
@@ -48,6 +53,22 @@ class RoutingPolicyTests(unittest.TestCase):
         changed["cost_units_by_deliverable"] = {"short_video": 5}
         with self.assertRaisesRegex(ValueError, "define exactly"):
             RoutingPolicy.from_mapping(changed)
+
+    def test_policy_comparison_is_offline_and_preserves_atomicity(self):
+        conservative = replace(self.policy, policy_id="conservative", max_requests_per_run=2)
+        expanded = replace(self.policy, policy_id="expanded", max_requests_per_run=4, max_total_cost_units=10)
+        report = compare_routing_policies(self.package, self.adapter, [self.policy, conservative, expanded])
+
+        self.assertEqual(report["external_calls_executed"], 0)
+        self.assertEqual(len(report["policies"]), 3)
+        self.assertEqual(report["policies"][0]["routing_status"], "eligible_for_human_review")
+        self.assertEqual(report["policies"][1]["routing_status"], "blocked")
+        self.assertEqual(report["policies"][1]["prepared_requests"], 0)
+        self.assertEqual(report["policies"][2]["routing_status"], "eligible_for_human_review")
+
+    def test_policy_comparison_rejects_duplicate_identity(self):
+        with self.assertRaisesRegex(ValueError, "identities"):
+            compare_routing_policies(self.package, self.adapter, [self.policy, self.policy])
 
 
 if __name__ == "__main__":

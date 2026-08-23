@@ -5,8 +5,17 @@
 - Overall: **PASS**
 - End-to-end planning and routing: PASS
 - Atomic quota-block regression: PASS
-- Evidence claims checked: 7
+- Routing-policy comparison: PASS
+- Evidence claims checked: 8
 - External candidates screened: 2
+
+## Routing-policy comparison
+
+| Policy | Status | Requests | Abstract units | Prepared envelopes |
+| --- | --- | --- | --- | --- |
+| `offline-review-budget-v1@1.0` | eligible_for_human_review | 3 | 8 | 3 |
+| `conservative-review-budget-v1@1.0` | blocked | 3 | 8 | 0 |
+| `expanded-review-budget-v1@1.0` | eligible_for_human_review | 3 | 8 | 3 |
 
 ## Pilot boundary
 
