@@ -6,7 +6,8 @@
 - End-to-end planning and routing: PASS
 - Atomic quota-block regression: PASS
 - Routing-policy comparison: PASS
-- Evidence claims checked: 8
+- Provider capability diff: PASS
+- Evidence claims checked: 9
 - External candidates screened: 2
 
 ## Routing-policy comparison

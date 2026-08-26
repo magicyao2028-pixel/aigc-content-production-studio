@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "provider_id": "offline-demo-adapter",
+    "display_name": "Offline Demonstration Adapter v1",
+    "supported_deliverables": ["short_video", "cover_image", "voiceover"],
+    "allowed_aspect_ratios": ["9:16", "16:9", "1:1"],
+    "max_duration_seconds": 60,
+    "external_execution_enabled": false
+  },
+  "candidate": {
+    "provider_id": "offline-demo-adapter",
+    "display_name": "Offline Demonstration Adapter v2 fixture",
+    "supported_deliverables": ["short_video", "cover_image"],
+    "allowed_aspect_ratios": ["9:16", "1:1"],
+    "max_duration_seconds": 45,
+    "external_execution_enabled": false
+  }
+}

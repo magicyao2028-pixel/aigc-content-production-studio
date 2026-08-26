@@ -8,7 +8,8 @@ from pathlib import Path
 from typing import Any
 
 from .brief import load_brief
-from .providers import OfflineProviderAdapter, load_provider_profile
+from .capability_diff import diff_provider_profiles
+from .providers import OfflineProviderAdapter, ProviderProfile, load_provider_profile
 from .quality import evaluate_quality_files
 from .routing import RoutingPolicy, build_guarded_request_plan, compare_routing_policies, load_routing_policy
 from .templates import load_template_set
@@ -25,6 +26,15 @@ def load_json_object(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path.name} must contain a JSON object")
     return payload
+
+
+def evaluate_provider_profile_diff(root: Path) -> dict[str, Any]:
+    payload = load_json_object(root / "data" / "provider_profile_versions.json")
+    if set(payload) != {"baseline", "candidate"}:
+        raise ValueError("provider_profile_versions.json must contain baseline and candidate")
+    baseline = ProviderProfile.from_mapping(payload["baseline"])
+    candidate = ProviderProfile.from_mapping(payload["candidate"])
+    return diff_provider_profiles(baseline, candidate)
 
 
 def validate_evidence_index(root: Path, payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -119,6 +129,7 @@ def run_trial(root: Path) -> dict[str, Any]:
         raise ValueError("routing_policy_variants.json must contain a list")
     variants = [RoutingPolicy.from_mapping(item) for item in variant_payload]
     routing_comparison = compare_routing_policies(package, adapter, variants)
+    capability_diff = evaluate_provider_profile_diff(root)
     routing = build_guarded_request_plan(package, adapter, policy)
     quality = evaluate_quality_files(
         root / "examples" / "sample_production_package.json",
@@ -148,6 +159,11 @@ def run_trial(root: Path) -> dict[str, Any]:
         feedback_regression["passed"],
         all(item["passed"] for item in external_checks),
         all(item["passed"] for item in evidence_checks),
+        capability_diff["status"] == "breaking"
+        and capability_diff["changes"]["removed_deliverables"] == ["voiceover"]
+        and capability_diff["changes"]["removed_aspect_ratios"] == ["16:9"]
+        and capability_diff["changes"]["max_duration_delta_seconds"] == -15
+        and capability_diff["external_calls_executed"] == 0,
     ]
     return {
         "schema_version": "1.0",
@@ -165,6 +181,7 @@ def run_trial(root: Path) -> dict[str, Any]:
         },
         "feedback_regression": feedback_regression,
         "routing_comparison": routing_comparison,
+        "provider_capability_diff": capability_diff,
         "external_intake": external_checks,
         "evidence_index": evidence_checks,
         "boundaries": manifest["boundaries"],
@@ -181,6 +198,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- End-to-end planning and routing: {'PASS' if report['core_flow']['passed'] else 'FAIL'}",
         f"- Atomic quota-block regression: {'PASS' if report['feedback_regression']['passed'] else 'FAIL'}",
         f"- Routing-policy comparison: {'PASS' if report['routing_comparison']['external_calls_executed'] == 0 else 'FAIL'}",
+        f"- Provider capability diff: {'PASS' if report['provider_capability_diff']['status'] == 'breaking' else 'FAIL'}",
         f"- Evidence claims checked: {len(report['evidence_index'])}",
         f"- External candidates screened: {len(report['external_intake'])}",
         "",

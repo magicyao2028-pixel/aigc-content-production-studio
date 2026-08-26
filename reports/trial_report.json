@@ -67,6 +67,43 @@
       "Policy comparison is fixture evidence and does not predict provider availability or commercial cost."
     ]
   },
+  "provider_capability_diff": {
+    "schema_version": "1.0",
+    "comparison_type": "offline provider capability diff",
+    "baseline": {
+      "provider_id": "offline-demo-adapter",
+      "display_name": "Offline Demonstration Adapter v1"
+    },
+    "candidate": {
+      "provider_id": "offline-demo-adapter",
+      "display_name": "Offline Demonstration Adapter v2 fixture"
+    },
+    "status": "breaking",
+    "changes": {
+      "added_deliverables": [],
+      "removed_deliverables": [
+        "voiceover"
+      ],
+      "added_aspect_ratios": [],
+      "removed_aspect_ratios": [
+        "16:9"
+      ],
+      "max_duration_delta_seconds": -15
+    },
+    "breaking_changes": [
+      "removed deliverables: voiceover",
+      "removed aspect ratios: 16:9",
+      "max duration reduced from 60s to 45s"
+    ],
+    "expansions": [],
+    "external_calls_executed": 0,
+    "human_review_required": true,
+    "interpretation": [
+      "A breaking diff requires human review before any future provider request plan uses the candidate profile.",
+      "This is a versioned fixture comparison, not a claim about live provider availability or pricing.",
+      "The public adapter remains prepared-not-sent and cannot authorize external execution."
+    ]
+  },
   "external_intake": [
     {
       "repository": "https://github.com/BerriAI/litellm",
@@ -144,6 +181,16 @@
       "artifact_paths": [
         "docs/TRIAL_GUIDE.md",
         "docs/SECURITY.md"
+      ],
+      "passed": true
+    },
+    {
+      "claim_id": "AIGC-CAPABILITY-001",
+      "artifact_paths": [
+        "data/provider_profile_versions.json",
+        "src/aigc_content_studio/capability_diff.py",
+        "tests/test_trial.py",
+        "reports/trial_report.json"
       ],
       "passed": true
     }

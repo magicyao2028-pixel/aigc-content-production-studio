@@ -27,6 +27,7 @@ Small content teams often move directly from a chat message to image, video and 
 - requires factual, brand, rights, privacy and release review;
 - works offline without calling a paid model API.
 - compares reviewed routing policies offline before any provider envelope is prepared.
+- compares versioned provider-capability profiles offline and flags breaking changes before future request planning.
 
 ## What this repository demonstrates
 
@@ -109,6 +110,8 @@ Then visit `http://localhost:8000`.
 
 [`examples/sample_routing_plan.json`](examples/sample_routing_plan.json) applies a reviewed three-request limit and eight abstract cost units to the sample package. The units are deliberately not currency, tokens, provider pricing or a quote. Exceeding either limit blocks atomically and emits no provider envelopes.
 
+[`data/provider_profile_versions.json`](data/provider_profile_versions.json) is a synthetic baseline/candidate fixture. `aigc-provider-diff` reports removed capabilities and requires human review; it does not query a live provider or authorize execution.
+
 ## Failure taxonomy
 
 | Category | What it catches | Release owner |
@@ -160,7 +163,8 @@ The tasks are provider-neutral. Template files may change wording and structure 
 - v0.3: configurable prompt templates and non-sending provider adapters;
 - v0.4: offline quality fixture and six-category failure taxonomy;
 - v0.5: cost-unit, quota and provider-routing preflight plus reviewer trial evidence;
-- v0.6: offline comparison of reviewed routing-policy variants with zero-send guarantees (current);
+- v0.6: offline comparison of reviewed routing-policy variants with zero-send guarantees;
+- v0.7: versioned provider-capability diff with breaking-change detection before request planning (current);
 - v1.0: controlled private pilot with approved assets and measured workflow outcomes.
 
 ## License

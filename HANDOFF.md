@@ -2,9 +2,9 @@
 
 ## Current state
 
-- Release stage: v0.6 trial-readiness prototype.
-- Maintenance completed: M5/10.
-- Core flow: validated brief → strategy → video/image/voice tasks → prompt templates → asset manifest → atomic cost-unit/quota routing preflight → offline provider request plan → asset lifecycle → six-category quality fixture → human review gates.
+- Release stage: v0.7 trial-readiness prototype.
+- Maintenance completed: M6/10.
+- Core flow: validated brief → strategy → video/image/voice tasks → prompt templates → asset manifest → atomic cost-unit/quota routing preflight → offline provider request plan → provider-capability diff → asset lifecycle → six-category quality fixture → human review gates.
 - Execution status: planning and prepared-not-sent request artifacts only; no model or media generation.
 - Public data: synthetic only.
 - Runtime cost: zero paid API dependency.
@@ -21,15 +21,16 @@ PYTHONPATH=src python -m aigc_content_studio.routing_cli output/production_packa
 PYTHONPATH=src python -m aigc_content_studio.trial_cli
 ```
 
-## M5 result
+## M6 result
 
 - Added `compare_routing_policies` and three reviewed synthetic policy variants.
 - The trial report now records which policies are eligible or blocked, how many envelopes would be prepared, and confirms zero external calls.
 - Abstract cost units remain planning weights only; no provider price, quota service or model availability is inferred.
+- Added a versioned provider-capability diff fixture that detects removed deliverables, removed aspect ratios and reduced duration before future request planning; the diff is offline, review-required and zero-send.
 
 ## Next maintenance round
 
-M6 can add a versioned provider-capability diff fixture or a human-review decision export, while retaining the v0.6 no-send and abstract-cost boundaries.
+M7 can add a human-review decision export, while retaining the v0.7 no-send and abstract-cost boundaries.
 
 ## Known limitations
 

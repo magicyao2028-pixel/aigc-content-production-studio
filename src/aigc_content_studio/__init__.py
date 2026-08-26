@@ -2,6 +2,7 @@
 
 from .brief import CampaignBrief, load_brief
 from .lifecycle import AssetLedger
+from .capability_diff import diff_provider_profiles
 from .providers import OfflineProviderAdapter, ProviderProfile, build_provider_request_plan, load_provider_profile
 from .quality import FAILURE_CATEGORIES, evaluate_quality_files, evaluate_quality_fixture
 from .routing import RoutingPolicy, build_guarded_request_plan, load_routing_policy
@@ -12,6 +13,7 @@ __all__ = [
     "AssetLedger",
     "CampaignBrief",
     "ContentProductionWorkflow",
+    "diff_provider_profiles",
     "FAILURE_CATEGORIES",
     "OfflineProviderAdapter",
     "PromptTemplateSet",
@@ -26,4 +28,4 @@ __all__ = [
     "load_routing_policy",
     "load_template_set",
 ]
-__version__ = "0.5.0"
+__version__ = "0.7.0"

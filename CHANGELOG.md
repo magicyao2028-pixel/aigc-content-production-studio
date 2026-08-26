@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0 - 2026-08-26
+
+- Added a versioned provider-capability diff fixture and offline comparator.
+- Added breaking-change detection for removed deliverables, removed aspect ratios and reduced maximum duration.
+- Extended trial evidence and CLI coverage while preserving the zero-send, synthetic-input and human-review boundaries.
+
 ## 0.6.0 - 2026-08-23
 
 - added a deterministic offline comparison of reviewed routing-policy variants;
