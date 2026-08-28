@@ -104,6 +104,102 @@
       "The public adapter remains prepared-not-sent and cannot authorize external execution."
     ]
   },
+  "human_review_export": {
+    "export_version": "1.0",
+    "decision_count": 7,
+    "decisions": [
+      {
+        "decision_id": "PROVIDER-CAPABILITY-001",
+        "subject_id": "candidate-profile",
+        "source": "provider_capability_diff",
+        "status": "blocked_pending_human_review",
+        "owner": "AI Application Operator",
+        "blockers": [
+          "breaking_provider_capability_change"
+        ],
+        "next_action": "confirm_provider_profile_or_replan_request",
+        "approved": false
+      },
+      {
+        "decision_id": "QUALITY-QF-FACT-001",
+        "subject_id": "CMP-TEA-001-01-SHORT_VIDEO",
+        "source": "quality_fixture",
+        "status": "blocked_pending_human_review",
+        "owner": "Product / Operations",
+        "blockers": [
+          "factual_drift"
+        ],
+        "next_action": "review_failure_evidence_and_request_revision",
+        "approved": false
+      },
+      {
+        "decision_id": "QUALITY-QF-IDENTITY-001",
+        "subject_id": "CMP-TEA-001-01-SHORT_VIDEO",
+        "source": "quality_fixture",
+        "status": "blocked_pending_human_review",
+        "owner": "Content Lead",
+        "blockers": [
+          "identity_instability"
+        ],
+        "next_action": "review_failure_evidence_and_request_revision",
+        "approved": false
+      },
+      {
+        "decision_id": "QUALITY-QF-PROVIDER-001",
+        "subject_id": "CMP-TEA-001-01-SHORT_VIDEO",
+        "source": "quality_fixture",
+        "status": "blocked_pending_human_review",
+        "owner": "AI Application Operator",
+        "blockers": [
+          "provider_rejection"
+        ],
+        "next_action": "review_failure_evidence_and_request_revision",
+        "approved": false
+      },
+      {
+        "decision_id": "QUALITY-QF-RIGHTS-001",
+        "subject_id": "CMP-TEA-001-03-VOICEOVER",
+        "source": "quality_fixture",
+        "status": "blocked_pending_human_review",
+        "owner": "Business Owner",
+        "blockers": [
+          "rights_risk"
+        ],
+        "next_action": "review_failure_evidence_and_request_revision",
+        "approved": false
+      },
+      {
+        "decision_id": "QUALITY-QF-TEXT-001",
+        "subject_id": "CMP-TEA-001-02-COVER_IMAGE",
+        "source": "quality_fixture",
+        "status": "blocked_pending_human_review",
+        "owner": "Content Lead",
+        "blockers": [
+          "unreadable_text"
+        ],
+        "next_action": "review_failure_evidence_and_request_revision",
+        "approved": false
+      },
+      {
+        "decision_id": "QUALITY-QF-TIMING-001",
+        "subject_id": "CMP-TEA-001-03-VOICEOVER",
+        "source": "quality_fixture",
+        "status": "blocked_pending_human_review",
+        "owner": "Content Producer",
+        "blockers": [
+          "timing_mismatch"
+        ],
+        "next_action": "review_failure_evidence_and_request_revision",
+        "approved": false
+      }
+    ],
+    "governance": {
+      "human_approval_required": true,
+      "external_calls_executed": 0,
+      "platform_writes_executed": 0,
+      "decision_execution_executed": false
+    }
+  },
   "external_intake": [
     {
       "repository": "https://github.com/BerriAI/litellm",
@@ -190,6 +286,15 @@
         "data/provider_profile_versions.json",
         "src/aigc_content_studio/capability_diff.py",
         "tests/test_trial.py",
+        "reports/trial_report.json"
+      ],
+      "passed": true
+    },
+    {
+      "claim_id": "AIGC-REVIEW-001",
+      "artifact_paths": [
+        "src/aigc_content_studio/review_decisions.py",
+        "tests/test_review_decisions.py",
         "reports/trial_report.json"
       ],
       "passed": true

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0 - 2026-08-28
+
+- Added a deterministic human-review decision export for blocked quality and provider-capability outcomes.
+- Preserved owner, blocker and next-action context while keeping approvals pending and platform writes at zero.
+- Added trial and regression coverage for the non-executing decision boundary.
+
 ## 0.7.0 - 2026-08-26
 
 - Added a versioned provider-capability diff fixture and offline comparator.

@@ -8,6 +8,7 @@ from .quality import FAILURE_CATEGORIES, evaluate_quality_files, evaluate_qualit
 from .routing import RoutingPolicy, build_guarded_request_plan, load_routing_policy
 from .templates import PromptTemplateSet, load_template_set
 from .workflow import ContentProductionWorkflow
+from .review_decisions import build_human_review_export
 
 __all__ = [
     "AssetLedger",
@@ -27,5 +28,6 @@ __all__ = [
     "load_provider_profile",
     "load_routing_policy",
     "load_template_set",
+    "build_human_review_export",
 ]
-__version__ = "0.7.0"
+__version__ = "0.8.0"

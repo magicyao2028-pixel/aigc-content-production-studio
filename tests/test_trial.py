@@ -28,7 +28,7 @@ class TrialReadinessTests(unittest.TestCase):
 
     def test_evidence_index_links_real_files(self):
         checked = validate_evidence_index(ROOT, load_json_object(ROOT / "evidence" / "evidence_index.json"))
-        self.assertEqual(len(checked), 9)
+        self.assertEqual(len(checked), 10)
         self.assertTrue(all(item["passed"] for item in checked))
 
     def test_external_intake_requires_full_commit_and_consistent_decision(self):

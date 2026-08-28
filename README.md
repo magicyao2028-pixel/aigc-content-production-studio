@@ -164,7 +164,8 @@ The tasks are provider-neutral. Template files may change wording and structure 
 - v0.4: offline quality fixture and six-category failure taxonomy;
 - v0.5: cost-unit, quota and provider-routing preflight plus reviewer trial evidence;
 - v0.6: offline comparison of reviewed routing-policy variants with zero-send guarantees;
-- v0.7: versioned provider-capability diff with breaking-change detection before request planning (current);
+- v0.7: versioned provider-capability diff with breaking-change detection before request planning;
+- v0.8: deterministic human-review decision export with no execution boundary (current);
 - v1.0: controlled private pilot with approved assets and measured workflow outcomes.
 
 ## License

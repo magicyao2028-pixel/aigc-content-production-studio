@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aigc-content-production-studio"
-version = "0.7.0"
+version = "0.8.0"
 description = "An offline multimodal content workflow with configurable prompts and non-sending provider adapters."
 readme = "README.md"
 requires-python = ">=3.10"

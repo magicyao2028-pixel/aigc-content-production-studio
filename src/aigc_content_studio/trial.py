@@ -14,6 +14,7 @@ from .quality import evaluate_quality_files
 from .routing import RoutingPolicy, build_guarded_request_plan, compare_routing_policies, load_routing_policy
 from .templates import load_template_set
 from .workflow import ContentProductionWorkflow
+from .review_decisions import build_human_review_export
 
 
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}")
@@ -136,6 +137,7 @@ def run_trial(root: Path) -> dict[str, Any]:
         root / "data" / "failure_taxonomy.json",
         root / "data" / "quality_fixture.json",
     )
+    review_export = build_human_review_export(quality, capability_diff, routing)
     core_passed = (
         routing["routing_status"] == "eligible_for_human_review"
         and routing["request_count"] == 3
@@ -164,6 +166,10 @@ def run_trial(root: Path) -> dict[str, Any]:
         and capability_diff["changes"]["removed_aspect_ratios"] == ["16:9"]
         and capability_diff["changes"]["max_duration_delta_seconds"] == -15
         and capability_diff["external_calls_executed"] == 0,
+        review_export["decision_count"] == quality["summary"]["blocked_cases"] + 1
+        and review_export["governance"]["human_approval_required"] is True
+        and review_export["governance"]["decision_execution_executed"] is False
+        and review_export["governance"]["platform_writes_executed"] == 0,
     ]
     return {
         "schema_version": "1.0",
@@ -182,6 +188,7 @@ def run_trial(root: Path) -> dict[str, Any]:
         "feedback_regression": feedback_regression,
         "routing_comparison": routing_comparison,
         "provider_capability_diff": capability_diff,
+        "human_review_export": review_export,
         "external_intake": external_checks,
         "evidence_index": evidence_checks,
         "boundaries": manifest["boundaries"],
@@ -199,6 +206,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Atomic quota-block regression: {'PASS' if report['feedback_regression']['passed'] else 'FAIL'}",
         f"- Routing-policy comparison: {'PASS' if report['routing_comparison']['external_calls_executed'] == 0 else 'FAIL'}",
         f"- Provider capability diff: {'PASS' if report['provider_capability_diff']['status'] == 'breaking' else 'FAIL'}",
+        f"- Human-review decision export: {'PASS' if report['human_review_export']['governance']['decision_execution_executed'] is False else 'FAIL'}",
         f"- Evidence claims checked: {len(report['evidence_index'])}",
         f"- External candidates screened: {len(report['external_intake'])}",
         "",

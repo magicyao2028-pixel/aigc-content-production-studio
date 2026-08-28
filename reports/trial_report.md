@@ -7,7 +7,8 @@
 - Atomic quota-block regression: PASS
 - Routing-policy comparison: PASS
 - Provider capability diff: PASS
-- Evidence claims checked: 9
+- Human-review decision export: PASS
+- Evidence claims checked: 10
 - External candidates screened: 2
 
 ## Routing-policy comparison
