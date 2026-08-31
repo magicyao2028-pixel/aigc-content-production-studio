@@ -1,0 +1,4 @@
+[
+  {"revision": 1, "decision_id": "QUALITY-QF-FACT-001", "status": "pending", "reviewer": "synthetic-owner", "applied": false},
+  {"revision": 2, "decision_id": "PROVIDER-CAPABILITY-001", "status": "pending", "reviewer": "synthetic-owner", "applied": false}
+]

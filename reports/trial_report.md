@@ -8,7 +8,8 @@
 - Routing-policy comparison: PASS
 - Provider capability diff: PASS
 - Human-review decision export: PASS
-- Evidence claims checked: 10
+- Append-only review history: PASS
+- Evidence claims checked: 11
 - External candidates screened: 2
 
 ## Routing-policy comparison

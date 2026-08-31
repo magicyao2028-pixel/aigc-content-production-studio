@@ -2,8 +2,8 @@
 
 ## Current state
 
-- Release stage: v0.8 trial-readiness prototype.
-- Maintenance completed: M7/10.
+- Release stage: v0.9 trial-readiness prototype.
+- Maintenance completed: M8/10.
 - Core flow: validated brief → strategy → video/image/voice tasks → prompt templates → asset manifest → atomic cost-unit/quota routing preflight → offline provider request plan → provider-capability diff → asset lifecycle → six-category quality fixture → human review gates.
 - Execution status: planning and prepared-not-sent request artifacts only; no model or media generation.
 - Public data: synthetic only.
@@ -33,9 +33,15 @@ PYTHONPATH=src python -m aigc_content_studio.trial_cli
 - Added a deterministic human-review decision export for blocked quality cases and breaking provider-capability changes.
 - Each item retains its owner, blockers and next action; approvals remain pending and no decision execution or platform write occurs.
 
+## M8 result
+
+- Added append-only synthetic review-history validation for exported decisions.
+- Revisions, decision references, reviewer identity and unapplied status are checked deterministically.
+- History records accountability only; no decision execution or asset publication occurs.
+
 ## Next maintenance round
 
-M8 can add bounded review-queue history or reviewer feedback replay, while retaining the v0.8 no-send and abstract-cost boundaries.
+M9 can add bounded reviewer feedback replay, while retaining the v0.9 no-send and abstract-cost boundaries.
 
 ## Known limitations
 

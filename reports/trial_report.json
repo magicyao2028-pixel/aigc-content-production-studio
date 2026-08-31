@@ -200,6 +200,30 @@
       "decision_execution_executed": false
     }
   },
+  "review_history": {
+    "history_version": "0.9",
+    "record_count": 2,
+    "revisions": [
+      1,
+      2
+    ],
+    "append_only": true,
+    "decision_execution_executed": false,
+    "platform_writes_executed": 0,
+    "records": [
+      {
+        "revision": 1,
+        "decision_id": "QUALITY-QF-FACT-001",
+        "passed": true
+      },
+      {
+        "revision": 2,
+        "decision_id": "PROVIDER-CAPABILITY-001",
+        "passed": true
+      }
+    ],
+    "boundary": "Synthetic review history records accountability only; it does not apply decisions or publish assets."
+  },
   "external_intake": [
     {
       "repository": "https://github.com/BerriAI/litellm",
@@ -295,6 +319,16 @@
       "artifact_paths": [
         "src/aigc_content_studio/review_decisions.py",
         "tests/test_review_decisions.py",
+        "reports/trial_report.json"
+      ],
+      "passed": true
+    },
+    {
+      "claim_id": "AIGC-REVIEW-HISTORY-001",
+      "artifact_paths": [
+        "src/aigc_content_studio/review_history.py",
+        "data/review_history.json",
+        "tests/test_review_history.py",
         "reports/trial_report.json"
       ],
       "passed": true

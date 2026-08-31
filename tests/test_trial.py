@@ -25,10 +25,12 @@ class TrialReadinessTests(unittest.TestCase):
         self.assertEqual(report["core_flow"]["routing_status"], "eligible_for_human_review")
         self.assertEqual(report["feedback_regression"]["routing_status"], "blocked")
         self.assertEqual(report["feedback_regression"]["prepared_requests"], 0)
+        self.assertTrue(report["review_history"]["append_only"])
+        self.assertFalse(report["review_history"]["decision_execution_executed"])
 
     def test_evidence_index_links_real_files(self):
         checked = validate_evidence_index(ROOT, load_json_object(ROOT / "evidence" / "evidence_index.json"))
-        self.assertEqual(len(checked), 10)
+        self.assertEqual(len(checked), 11)
         self.assertTrue(all(item["passed"] for item in checked))
 
     def test_external_intake_requires_full_commit_and_consistent_decision(self):

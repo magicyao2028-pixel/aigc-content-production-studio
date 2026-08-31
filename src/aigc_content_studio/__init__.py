@@ -9,6 +9,7 @@ from .routing import RoutingPolicy, build_guarded_request_plan, load_routing_pol
 from .templates import PromptTemplateSet, load_template_set
 from .workflow import ContentProductionWorkflow
 from .review_decisions import build_human_review_export
+from .review_history import validate_review_history
 
 __all__ = [
     "AssetLedger",
@@ -29,5 +30,6 @@ __all__ = [
     "load_routing_policy",
     "load_template_set",
     "build_human_review_export",
+    "validate_review_history",
 ]
-__version__ = "0.8.0"
+__version__ = "0.9.0"

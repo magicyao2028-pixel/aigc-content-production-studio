@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0 - 2026-08-31
+
+- Added append-only synthetic review-history validation for human-review decisions.
+- Preserved no-send, no-publication and unapplied-decision boundaries.
+
 ## 0.8.0 - 2026-08-28
 
 - Added a deterministic human-review decision export for blocked quality and provider-capability outcomes.
