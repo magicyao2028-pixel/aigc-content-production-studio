@@ -1,0 +1,20 @@
+[
+  {
+    "feedback_id": "FB-REV-001",
+    "decision_id": "QUALITY-QF-FACT-001",
+    "recorded_on": "2026-08-25",
+    "classification": "usability",
+    "status": "accepted",
+    "summary": "Synthetic reviewer requested clearer failure-evidence grouping before a human revision decision.",
+    "applied": false
+  },
+  {
+    "feedback_id": "FB-REV-002",
+    "decision_id": "PROVIDER-CAPABILITY-001",
+    "recorded_on": "2026-08-26",
+    "classification": "requirement",
+    "status": "pending",
+    "summary": "Synthetic reviewer noted that provider-profile confirmation needs a separate approval step.",
+    "applied": false
+  }
+]

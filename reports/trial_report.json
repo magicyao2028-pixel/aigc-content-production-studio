@@ -224,6 +224,36 @@
     ],
     "boundary": "Synthetic review history records accountability only; it does not apply decisions or publish assets."
   },
+  "reviewer_feedback": {
+    "schema_version": "1.0",
+    "record_count": 2,
+    "status_counts": {
+      "accepted": 1,
+      "pending": 1
+    },
+    "replayed_count": 1,
+    "excluded_count": 1,
+    "replayed": [
+      {
+        "feedback_id": "FB-REV-001",
+        "decision_id": "QUALITY-QF-FACT-001",
+        "status": "accepted",
+        "passed": true
+      }
+    ],
+    "excluded": [
+      {
+        "feedback_id": "FB-REV-002",
+        "decision_id": "PROVIDER-CAPABILITY-001",
+        "status": "pending",
+        "passed": true
+      }
+    ],
+    "decision_execution_executed": false,
+    "asset_publication_executed": false,
+    "external_calls_executed": 0,
+    "boundary": "Only accepted synthetic feedback is replayed as regression metadata; no decision is applied and no asset is published."
+  },
   "external_intake": [
     {
       "repository": "https://github.com/BerriAI/litellm",
@@ -329,6 +359,16 @@
         "src/aigc_content_studio/review_history.py",
         "data/review_history.json",
         "tests/test_review_history.py",
+        "reports/trial_report.json"
+      ],
+      "passed": true
+    },
+    {
+      "claim_id": "AIGC-FEEDBACK-REPLAY-001",
+      "artifact_paths": [
+        "src/aigc_content_studio/feedback_replay.py",
+        "data/reviewer_feedback.json",
+        "tests/test_feedback_replay.py",
         "reports/trial_report.json"
       ],
       "passed": true

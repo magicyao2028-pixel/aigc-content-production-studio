@@ -16,6 +16,7 @@ from .templates import load_template_set
 from .workflow import ContentProductionWorkflow
 from .review_decisions import build_human_review_export
 from .review_history import validate_review_history
+from .feedback_replay import replay_reviewer_feedback
 
 
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}")
@@ -143,6 +144,10 @@ def run_trial(root: Path) -> dict[str, Any]:
         json.loads((root / "data" / "review_history.json").read_text(encoding="utf-8")),
         review_export,
     )
+    reviewer_feedback = replay_reviewer_feedback(
+        json.loads((root / "data" / "reviewer_feedback.json").read_text(encoding="utf-8")),
+        review_export,
+    )
     core_passed = (
         routing["routing_status"] == "eligible_for_human_review"
         and routing["request_count"] == 3
@@ -179,6 +184,10 @@ def run_trial(root: Path) -> dict[str, Any]:
         and review_history["append_only"] is True
         and review_history["decision_execution_executed"] is False
         and review_history["platform_writes_executed"] == 0,
+        reviewer_feedback["replayed_count"] == 1
+        and reviewer_feedback["excluded_count"] == 1
+        and reviewer_feedback["decision_execution_executed"] is False
+        and reviewer_feedback["asset_publication_executed"] is False,
     ]
     return {
         "schema_version": "1.0",
@@ -199,6 +208,7 @@ def run_trial(root: Path) -> dict[str, Any]:
         "provider_capability_diff": capability_diff,
         "human_review_export": review_export,
         "review_history": review_history,
+        "reviewer_feedback": reviewer_feedback,
         "external_intake": external_checks,
         "evidence_index": evidence_checks,
         "boundaries": manifest["boundaries"],
@@ -218,6 +228,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Provider capability diff: {'PASS' if report['provider_capability_diff']['status'] == 'breaking' else 'FAIL'}",
         f"- Human-review decision export: {'PASS' if report['human_review_export']['governance']['decision_execution_executed'] is False else 'FAIL'}",
         f"- Append-only review history: {'PASS' if report['review_history']['append_only'] and not report['review_history']['decision_execution_executed'] else 'FAIL'}",
+        f"- Reviewer feedback replay boundary: {'PASS' if report['reviewer_feedback']['replayed_count'] == 1 and report['reviewer_feedback']['excluded_count'] == 1 else 'FAIL'}",
         f"- Evidence claims checked: {len(report['evidence_index'])}",
         f"- External candidates screened: {len(report['external_intake'])}",
         "",

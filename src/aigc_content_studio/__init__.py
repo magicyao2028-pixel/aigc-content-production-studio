@@ -10,6 +10,7 @@ from .templates import PromptTemplateSet, load_template_set
 from .workflow import ContentProductionWorkflow
 from .review_decisions import build_human_review_export
 from .review_history import validate_review_history
+from .feedback_replay import replay_reviewer_feedback
 
 __all__ = [
     "AssetLedger",
@@ -31,5 +32,6 @@ __all__ = [
     "load_template_set",
     "build_human_review_export",
     "validate_review_history",
+    "replay_reviewer_feedback",
 ]
-__version__ = "0.9.0"
+__version__ = "1.0.0"

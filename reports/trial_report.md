@@ -9,7 +9,8 @@
 - Provider capability diff: PASS
 - Human-review decision export: PASS
 - Append-only review history: PASS
-- Evidence claims checked: 11
+- Reviewer feedback replay boundary: PASS
+- Evidence claims checked: 12
 - External candidates screened: 2
 
 ## Routing-policy comparison
