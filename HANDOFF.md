@@ -41,7 +41,7 @@ PYTHONPATH=src python -m aigc_content_studio.trial_cli
 
 ## Next maintenance round
 
-M10 can add bounded reviewer feedback replay, while retaining the v1.0 no-send and abstract-cost boundaries.
+M10 can add bounded replay-result reconciliation and stale-item visibility, while retaining the v1.0 no-send and abstract-cost boundaries.
 
 ## M9 result
 
