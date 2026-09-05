@@ -3,7 +3,7 @@
 ## Current state
 
 - Release stage: v1.0 trial-readiness prototype.
-- Maintenance completed: M9/10.
+- Maintenance completed: M10/10.
 - Core flow: validated brief → strategy → video/image/voice tasks → prompt templates → asset manifest → atomic cost-unit/quota routing preflight → offline provider request plan → provider-capability diff → asset lifecycle → six-category quality fixture → human review gates.
 - Execution status: planning and prepared-not-sent request artifacts only; no model or media generation.
 - Public data: synthetic only.
@@ -41,13 +41,14 @@ PYTHONPATH=src python -m aigc_content_studio.trial_cli
 
 ## Next maintenance round
 
-M10 can add bounded replay-result reconciliation and stale-item visibility, while retaining the v1.0 no-send and abstract-cost boundaries.
+M10 is complete. The next step is portfolio-level review or a separately confirmed maintenance wave, while retaining the v1.0 no-send and abstract-cost boundaries.
 
 ## M9 result
 
 - Added feedback replay that accepts only accepted synthetic records linked to the current human-review export.
 - Pending/rejected records remain excluded; duplicate IDs, unknown decisions, invalid dates and applied feedback fail closed.
 - Replay is regression metadata only: no decision execution, asset publication or external call occurs.
+- M10: added stale reviewer-feedback visibility for accepted feedback older than a declared cutoff on unresolved decisions; pending/rejected items stay excluded and no reminder or decision is sent.
 
 ## Known limitations
 

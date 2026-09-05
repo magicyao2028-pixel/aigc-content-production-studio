@@ -2,6 +2,9 @@
 
 ## 1.0.0 - 2026-09-03
 
+- added stale reviewer-feedback visibility for unresolved decisions using a declared cutoff;
+- kept pending/rejected feedback excluded and preserved no-decision, no-publication and no-send boundaries;
+- added trial, fixture and fail-closed regression coverage for stale-item visibility.
 - added bounded replay of accepted synthetic reviewer feedback;
 - preserved append-only history, no-send, no-publication and abstract-cost boundaries;
 - added fail-closed validation and trial evidence for pending-feedback exclusion.

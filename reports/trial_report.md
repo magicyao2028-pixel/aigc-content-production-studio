@@ -10,7 +10,8 @@
 - Human-review decision export: PASS
 - Append-only review history: PASS
 - Reviewer feedback replay boundary: PASS
-- Evidence claims checked: 12
+- Stale reviewer-feedback visibility: PASS
+- Evidence claims checked: 13
 - External candidates screened: 2
 
 ## Routing-policy comparison
