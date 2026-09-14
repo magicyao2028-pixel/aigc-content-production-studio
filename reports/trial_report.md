@@ -4,6 +4,7 @@
 
 - Overall: **PASS**
 - End-to-end planning and routing: PASS
+- Zero-send execution preflight: PASS
 - Atomic quota-block regression: PASS
 - Routing-policy comparison: PASS
 - Provider capability diff: PASS
@@ -11,8 +12,13 @@
 - Append-only review history: PASS
 - Reviewer feedback replay boundary: PASS
 - Stale reviewer-feedback visibility: PASS
-- Evidence claims checked: 13
+- Evidence claims checked: 14
 - External candidates screened: 2
+
+## Execution preflight
+
+- Prepared schedule: 3 job descriptors in 2 waves; execution authorized: false.
+- Duplicate case: blocked; job descriptors: 0; attempts/external requests/provider sends: 0/0/0.
 
 ## Routing-policy comparison
 
@@ -26,4 +32,5 @@
 
 - Synthetic brief and quality labels only; no real campaign, media-quality or adoption claim.
 - Abstract cost units are not currency, tokens, provider pricing or a commercial quote.
+- The execution preflight is a deterministic zero-send schedule artifact, not a background runner or proof of provider idempotency.
 - A real pilot requires approved provider terms, credentials, budgets, rights review, generated assets and accountable human approval.

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aigc-content-production-studio"
-version = "1.0.0"
+version = "1.1.0"
 description = "An offline multimodal content workflow with configurable prompts and non-sending provider adapters."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,6 +20,7 @@ aigc-quality = "aigc_content_studio.quality_cli:main"
 aigc-route = "aigc_content_studio.routing_cli:main"
 aigc-studio-trial = "aigc_content_studio.trial_cli:main"
 aigc-provider-diff = "aigc_content_studio.capability_diff_cli:main"
+aigc-execution-preflight = "aigc_content_studio.execution_preflight_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

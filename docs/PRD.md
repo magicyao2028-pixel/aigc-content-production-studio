@@ -5,8 +5,8 @@
 | Field | Value |
 | --- | --- |
 | Product | AIGC Content Production Studio |
-| Version | 0.4 |
-| Status | Product-validation MVP |
+| Version | 1.1 |
+| Status | Public trial-readiness prototype with zero-send execution-boundary proof |
 | Primary user | Content operations lead in a small or medium-sized business |
 | Public data policy | Synthetic brief and generated planning artifacts only |
 
@@ -18,7 +18,7 @@ Content teams frequently start production with an incomplete request. Product fa
 
 If one validated brief produces linked multimodal tasks, stable asset IDs and mandatory review gates, a content lead can coordinate AIGC production more consistently and identify missing facts before external generation begins.
 
-The public prototype has not been tested with real users. v0.4 validates workflow, template, request-preparation and synthetic review-fixture logic only.
+The public prototype has not been tested with real users. v1.1 validates workflow, template, request preparation, zero-send scheduling artifacts and synthetic review-fixture logic only.
 
 ## 4. Users and jobs to be done
 
@@ -36,7 +36,7 @@ The public prototype has not been tested with real users. v0.4 validates workflo
 - see who is responsible for each review gate;
 - prevent an unapproved asset from being published.
 
-## 5. v0.4 scope
+## 5. Public prototype scope
 
 ### In scope
 
@@ -56,6 +56,12 @@ The public prototype has not been tested with real users. v0.4 validates workflo
 14. Validate an explicit six-category AIGC failure taxonomy.
 15. Evaluate manually labelled synthetic review cases against package asset IDs.
 16. Block fixture release when any controlled failure is present and retain evidence and ownership.
+17. Apply atomic abstract-unit and request-count routing policy before provider envelopes are prepared.
+18. Compare reviewed routing/provider-capability fixtures and retain human-review boundaries.
+19. Validate synthetic human-review history, accepted feedback replay and stale unresolved-feedback visibility without executing decisions.
+20. Accept only an eligible `prepared_not_sent` routing plan for strict offline execution preflight.
+21. Produce deterministic request fingerprints, idempotency/job identifiers and bounded concurrency waves while executing zero attempts or sends.
+22. Block a duplicate fingerprint or request ID atomically before creating any job descriptor.
 
 ### Out of scope
 
@@ -63,7 +69,7 @@ The public prototype has not been tested with real users. v0.4 validates workflo
 - model-provider authentication, network execution and production API adapters;
 - asset upload, editing, binary storage or publishing;
 - social account integrations and campaign analytics;
-- production permissions, queues, concurrency and monitoring;
+- production permissions, durable queues/workers, live concurrency, retry execution and monitoring;
 - claims of business performance or real client use.
 - automated media inspection, perceptual scoring or claims about generated-output quality.
 
@@ -87,6 +93,10 @@ The public prototype has not been tested with real users. v0.4 validates workflo
 | FR-14 | Control failure labels | Must | Only the six documented categories are accepted and every category defines evidence, owner and release behavior. |
 | FR-15 | Bind review evidence | Must | Every review case references a known package asset and retains a non-empty observation and evidence record. |
 | FR-16 | Block failed candidates | Must | Any controlled failure produces a blocked decision while no-failure cases remain `pass_fixture_only`. |
+| FR-17 | Gate routing | Must | Request-count or abstract-unit overflow blocks atomically and produces no provider envelope. |
+| FR-18 | Validate execution input | Must | Only eligible, human-review-required `prepared_not_sent` envelopes with zero prior calls enter scheduling preflight. |
+| FR-19 | Prevent duplicate scheduling | Must | A duplicate request fingerprint or ID blocks the complete preflight before any job descriptor or wave is created. |
+| FR-20 | Preserve zero-send boundary | Must | Passing and blocked preflights keep execution unauthorized and attempts, external requests and provider sends at zero. |
 
 ## 7. Future product metrics
 
@@ -100,4 +110,4 @@ The public prototype has not been tested with real users. v0.4 validates workflo
 
 ## 8. Release gate
 
-Do not claim reduced production time, improved content quality, saved model cost or increased conversion until a controlled pilot compares a documented baseline with reviewed outcomes. A synthetic `pass_fixture_only` result is never approval of an actual media asset.
+Do not claim reduced production time, improved content quality, saved model cost or increased conversion until a controlled pilot compares a documented baseline with reviewed outcomes. Deterministic local job/idempotency identifiers are not a live queue or provider guarantee. A synthetic `pass_fixture_only` result is never approval of an actual media asset.

@@ -12,6 +12,163 @@
     "external_calls_executed": 0,
     "policy_comparison_count": 3
   },
+  "execution_preflight": {
+    "passed": true,
+    "prepared_schedule": {
+      "schema_version": "1.0",
+      "preflight_type": "offline_zero_send_execution_schedule",
+      "campaign_id": "CMP-TEA-001",
+      "provider_id": "offline-demo-adapter",
+      "source_routing_status": "eligible_for_human_review",
+      "source_request_count": 3,
+      "execution_policy": {
+        "schema_version": "1.0",
+        "policy_id": "offline-zero-send-schedule-v1",
+        "version": "1.0",
+        "max_concurrency": 2,
+        "max_attempts_per_job": 3,
+        "retry_backoff_seconds": [
+          2,
+          5
+        ]
+      },
+      "execution_authorized": false,
+      "human_approval_required": true,
+      "attempts_executed": 0,
+      "external_requests_executed": 0,
+      "provider_sends_executed": 0,
+      "duplicate_fingerprints": [],
+      "duplicate_request_ids": [],
+      "preflight_status": "prepared_for_human_review",
+      "execution_status": "prepared_not_sent",
+      "reasons": [],
+      "job_count": 3,
+      "wave_count": 2,
+      "jobs": [
+        {
+          "job_id": "job-sha256-a2d9520afe321c00b05afb7e04c55d1ddcc00b4d880a75d367124fc1bed21d9d",
+          "idempotency_key": "idem-sha256-a2d9520afe321c00b05afb7e04c55d1ddcc00b4d880a75d367124fc1bed21d9d",
+          "request_fingerprint": "a2d9520afe321c00b05afb7e04c55d1ddcc00b4d880a75d367124fc1bed21d9d",
+          "source_request_id": "REQ-CMP-TEA-001-01-SHORT_VIDEO-offline-demo-adapter",
+          "asset_id": "CMP-TEA-001-01-SHORT_VIDEO",
+          "deliverable_type": "short_video",
+          "wave_number": 1,
+          "execution_status": "prepared_not_sent",
+          "max_attempts_per_job": 3,
+          "retry_backoff_seconds": [
+            2,
+            5
+          ],
+          "attempts_executed": 0,
+          "external_requests_executed": 0,
+          "provider_sends_executed": 0
+        },
+        {
+          "job_id": "job-sha256-1fbe56f310d3298bc76128f8621d5f2f1722650c1341b66a67aaee3bf8d3e121",
+          "idempotency_key": "idem-sha256-1fbe56f310d3298bc76128f8621d5f2f1722650c1341b66a67aaee3bf8d3e121",
+          "request_fingerprint": "1fbe56f310d3298bc76128f8621d5f2f1722650c1341b66a67aaee3bf8d3e121",
+          "source_request_id": "REQ-CMP-TEA-001-02-COVER_IMAGE-offline-demo-adapter",
+          "asset_id": "CMP-TEA-001-02-COVER_IMAGE",
+          "deliverable_type": "cover_image",
+          "wave_number": 1,
+          "execution_status": "prepared_not_sent",
+          "max_attempts_per_job": 3,
+          "retry_backoff_seconds": [
+            2,
+            5
+          ],
+          "attempts_executed": 0,
+          "external_requests_executed": 0,
+          "provider_sends_executed": 0
+        },
+        {
+          "job_id": "job-sha256-60beba37f2bf4f413a5b0e0a3b4964d3dbf0f158a9eae46336e51df6646fd133",
+          "idempotency_key": "idem-sha256-60beba37f2bf4f413a5b0e0a3b4964d3dbf0f158a9eae46336e51df6646fd133",
+          "request_fingerprint": "60beba37f2bf4f413a5b0e0a3b4964d3dbf0f158a9eae46336e51df6646fd133",
+          "source_request_id": "REQ-CMP-TEA-001-03-VOICEOVER-offline-demo-adapter",
+          "asset_id": "CMP-TEA-001-03-VOICEOVER",
+          "deliverable_type": "voiceover",
+          "wave_number": 2,
+          "execution_status": "prepared_not_sent",
+          "max_attempts_per_job": 3,
+          "retry_backoff_seconds": [
+            2,
+            5
+          ],
+          "attempts_executed": 0,
+          "external_requests_executed": 0,
+          "provider_sends_executed": 0
+        }
+      ],
+      "waves": [
+        {
+          "wave_number": 1,
+          "job_count": 2,
+          "job_ids": [
+            "job-sha256-a2d9520afe321c00b05afb7e04c55d1ddcc00b4d880a75d367124fc1bed21d9d",
+            "job-sha256-1fbe56f310d3298bc76128f8621d5f2f1722650c1341b66a67aaee3bf8d3e121"
+          ],
+          "execution_status": "prepared_not_sent",
+          "attempts_executed": 0,
+          "external_requests_executed": 0,
+          "provider_sends_executed": 0
+        },
+        {
+          "wave_number": 2,
+          "job_count": 1,
+          "job_ids": [
+            "job-sha256-60beba37f2bf4f413a5b0e0a3b4964d3dbf0f158a9eae46336e51df6646fd133"
+          ],
+          "execution_status": "prepared_not_sent",
+          "attempts_executed": 0,
+          "external_requests_executed": 0,
+          "provider_sends_executed": 0
+        }
+      ],
+      "approval_gate": "This schedule is review-only. A separately authorized execution service must revalidate identity, budget, rights and provider state before any send."
+    },
+    "duplicate_case": {
+      "schema_version": "1.0",
+      "preflight_type": "offline_zero_send_execution_schedule",
+      "campaign_id": "CMP-TEA-001",
+      "provider_id": "offline-demo-adapter",
+      "source_routing_status": "eligible_for_human_review",
+      "source_request_count": 4,
+      "execution_policy": {
+        "schema_version": "1.0",
+        "policy_id": "offline-zero-send-schedule-v1",
+        "version": "1.0",
+        "max_concurrency": 2,
+        "max_attempts_per_job": 3,
+        "retry_backoff_seconds": [
+          2,
+          5
+        ]
+      },
+      "execution_authorized": false,
+      "human_approval_required": true,
+      "attempts_executed": 0,
+      "external_requests_executed": 0,
+      "provider_sends_executed": 0,
+      "duplicate_fingerprints": [
+        "a2d9520afe321c00b05afb7e04c55d1ddcc00b4d880a75d367124fc1bed21d9d"
+      ],
+      "duplicate_request_ids": [
+        "REQ-CMP-TEA-001-01-SHORT_VIDEO-offline-demo-adapter"
+      ],
+      "preflight_status": "blocked",
+      "execution_status": "blocked_not_prepared",
+      "reasons": [
+        "duplicate request fingerprints detected: a2d9520afe321c00b05afb7e04c55d1ddcc00b4d880a75d367124fc1bed21d9d",
+        "duplicate request IDs detected: REQ-CMP-TEA-001-01-SHORT_VIDEO-offline-demo-adapter"
+      ],
+      "job_count": 0,
+      "wave_count": 0,
+      "jobs": [],
+      "waves": [],
+      "approval_gate": "Remove duplicate source requests and rerun the offline preflight; no job or provider send has been created."
+    }
+  },
   "feedback_regression": {
     "feedback_id": "FB-AIGC-SYN-001",
     "source_type": "synthetic",
@@ -411,11 +568,23 @@
         "src/aigc_content_studio/trial.py"
       ],
       "passed": true
+    },
+    {
+      "claim_id": "AIGC-EXECUTION-PREFLIGHT-001",
+      "artifact_paths": [
+        "src/aigc_content_studio/execution_preflight.py",
+        "data/execution_policy.json",
+        "examples/sample_execution_preflight.json",
+        "tests/test_execution_preflight.py",
+        "reports/trial_report.json"
+      ],
+      "passed": true
     }
   ],
   "boundaries": [
     "Synthetic brief and quality labels only; no real campaign, media-quality or adoption claim.",
     "Abstract cost units are not currency, tokens, provider pricing or a commercial quote.",
+    "The execution preflight is a deterministic zero-send schedule artifact, not a background runner or proof of provider idempotency.",
     "A real pilot requires approved provider terms, credentials, budgets, rights review, generated assets and accountable human approval."
   ]
 }

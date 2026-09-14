@@ -1,6 +1,6 @@
 # Model-Routing Boundary
 
-## v0.4 behavior
+## Public prototype behavior
 
 The repository produces provider-neutral tasks, validates prompt templates, builds offline request envelopes and evaluates synthetic quality labels. It does not call, inspect or benchmark any model output.
 
@@ -14,6 +14,8 @@ The repository produces provider-neutral tasks, validates prompt templates, buil
 ## Current adapter gate
 
 The included profile declares supported deliverables, aspect ratios and a maximum duration. The adapter rejects incompatible tasks before creating a request envelope. Unknown fields are rejected so credentials and endpoints are not embedded in public profile files. `external_execution_enabled: true` is also rejected.
+
+After routing, the optional v1.1 execution preflight accepts only eligible `prepared_not_sent` envelopes. Its strict local policy allows concurrency from 1–16, attempts from 1–5, and exactly one non-decreasing 1–3,600-second backoff entry per possible retry; canonical fingerprints then produce deterministic idempotency/job identifiers and waves. Duplicate fingerprints block the whole schedule. This creates no live queue, timer, retry or provider request and does not prove provider-side idempotency.
 
 ## Future routing rule
 

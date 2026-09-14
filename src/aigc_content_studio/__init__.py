@@ -1,5 +1,6 @@
 """Controlled multimodal content-production planning workflow."""
 
+from ._version import __version__
 from .brief import CampaignBrief, load_brief
 from .lifecycle import AssetLedger
 from .capability_diff import diff_provider_profiles
@@ -12,11 +13,17 @@ from .review_decisions import build_human_review_export
 from .review_history import validate_review_history
 from .feedback_replay import replay_reviewer_feedback
 from .review_visibility import summarize_stale_feedback
+from .execution_preflight import (
+    ExecutionPolicy,
+    build_execution_preflight,
+    load_execution_policy,
+)
 
 __all__ = [
     "AssetLedger",
     "CampaignBrief",
     "ContentProductionWorkflow",
+    "ExecutionPolicy",
     "diff_provider_profiles",
     "FAILURE_CATEGORIES",
     "OfflineProviderAdapter",
@@ -25,9 +32,11 @@ __all__ = [
     "RoutingPolicy",
     "build_provider_request_plan",
     "build_guarded_request_plan",
+    "build_execution_preflight",
     "evaluate_quality_files",
     "evaluate_quality_fixture",
     "load_brief",
+    "load_execution_policy",
     "load_provider_profile",
     "load_routing_policy",
     "load_template_set",
@@ -35,5 +44,5 @@ __all__ = [
     "validate_review_history",
     "replay_reviewer_feedback",
     "summarize_stale_feedback",
+    "__version__",
 ]
-__version__ = "1.0.0"

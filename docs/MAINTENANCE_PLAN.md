@@ -7,10 +7,13 @@ The initial repository is intentionally limited. Each round must add implementat
 | M1 | Asset status transitions and version history | Complete |
 | M2 | Configurable prompt templates and provider-adapter interfaces | Complete in v0.3.0 |
 | M3 | Package-quality fixture and failure taxonomy | Complete in v0.4.0 |
-| M4 | Cost, quota and provider-routing policy | Planned |
-| M5 | Brief extraction and structured clarification loop | Planned |
-| M6 | Optional zero-cost/local model adapter experiment | Planned |
-| M7 | Background jobs, concurrency and retry controls | Planned |
-| M8 | Persistence, roles and approval audit trail | Planned |
-| M9 | Observability, security tests and operational runbook | Planned |
-| M10 | Controlled-pilot package and final portfolio case study | Planned |
+| M4 | Atomic cost-unit/quota routing and reviewer trial | Complete in v0.5.0 |
+| M5 | Offline routing-policy comparison | Complete in v0.6.0 |
+| M6 | Versioned provider-capability diff | Complete in v0.7.0 |
+| M7 | Deterministic human-review decision export | Complete in v0.8.0 |
+| M8 | Append-only synthetic review history | Complete in v0.9.0 |
+| M9 | Accepted synthetic reviewer-feedback replay | Complete in v1.0.0 |
+| M10 | Stale unresolved-feedback visibility | Complete in v1.0.0 |
+| Post-M10 P2 Slot 3 | Strict zero-send execution-scheduling preflight | Complete |
+
+No later package starts automatically. A real queue, workers, retries and provider sends require a separately confirmed authenticated integration.

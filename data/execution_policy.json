@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "policy_id": "offline-zero-send-schedule-v1",
+  "version": "1.0",
+  "max_concurrency": 2,
+  "max_attempts_per_job": 3,
+  "retry_backoff_seconds": [2, 5]
+}

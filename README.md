@@ -3,7 +3,7 @@
 [![CI](https://github.com/magicyao2028-pixel/aigc-content-production-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/magicyao2028-pixel/aigc-content-production-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> 中文介绍：这是一个面向中小企业内容团队的AIGC多模态生产流程原型。它把产品事实、受众、目标、品牌语气和合规限制整理成视频、生图、语音任务包、资产清单与人工审核闸门，并用离线合成审核记录演示事实漂移、主体不稳定、文字不可读、时长不符、权利风险和供应商拒绝六类失败。公开版本不调用付费模型，不把合成记录冒充真实生成质量，也不包含任何公司隐私数据。
+> 中文介绍：这是一个面向中小企业内容团队的AIGC多模态生产流程原型。它把产品事实、受众、目标、品牌语气和合规限制整理成视频、生图、语音任务包、资产清单与人工审核闸门，并用离线合成审核记录演示事实漂移、主体不稳定、文字不可读、时长不符、权利风险和供应商拒绝六类失败。公开版本还能对已准备但未发送的请求做严格、零发送的幂等与并发波次预检；它不调用付费模型，不把合成记录冒充真实生成质量，也不包含任何公司隐私数据。
 
 **Live prototype:** https://magicyao2028-pixel.github.io/aigc-content-production-studio/
 
@@ -24,6 +24,8 @@ Small content teams often move directly from a chat message to image, video and 
 - enforces explicit asset status transitions and preserves a local event history;
 - evaluates a manually labelled offline fixture against a six-category failure taxonomy;
 - applies an atomic request-quota and abstract cost-unit routing preflight before provider envelopes are prepared;
+- applies a strict zero-send execution preflight to eligible `prepared_not_sent` envelopes, producing deterministic job/idempotency identifiers and bounded concurrency waves;
+- blocks duplicate request fingerprints atomically before creating any job descriptor;
 - requires factual, brand, rights, privacy and release review;
 - works offline without calling a paid model API.
 - compares reviewed routing policies offline before any provider envelope is prepared.
@@ -42,6 +44,7 @@ Small content teams often move directly from a chat message to image, video and 
 | Asset governance | Validated status machine, append-only local event history and reproducible example ledger |
 | Provider portability | Validated prompt templates and an offline adapter contract separated from the core workflow |
 | Quality governance | Controlled failure taxonomy, retained evidence and release-blocking decisions on synthetic review cases |
+| Execution-boundary proof | Strict scheduling policy, deterministic idempotency keys, bounded waves and duplicate-request atomic blocking with zero attempts or sends |
 
 ## Core workflow
 
@@ -52,13 +55,15 @@ flowchart LR
     S --> M[Multimodal task planning]
     M --> T[Validated prompt templates]
     T --> A[Asset manifest]
-    A --> G{Human review gates}
+    A --> RP[Atomic quota routing preflight]
+    RP --> EP[Zero-send execution scheduling preflight]
+    EP --> G{Human review gates}
     G -->|Approved future candidate| Q[Quality evidence and taxonomy]
     Q -->|Pass| E[Authorized release decision]
     Q -->|Failure| R[Revise brief, task or candidate]
 ```
 
-The current workflow is deterministic. It does not call an LLM, image model, video model or speech model, so it must not be represented as a production content Agent. v0.4 can prepare provider-shaped request envelopes and evaluate synthetic review labels, but it executes zero external calls and inspects no real media.
+The current workflow is deterministic. It does not call an LLM, image model, video model or speech model, so it must not be represented as a production content Agent. v1.1 can prepare provider-shaped request envelopes, build review-only job descriptors and concurrency waves, and evaluate synthetic review labels. It creates no background job, executes no retry or external request, sends nothing to a provider and inspects no real media.
 
 ## Quick start
 
@@ -72,6 +77,7 @@ aigc-assets initialize output/production_package.json output/asset_history.json
 aigc-assets transition output/asset_history.json CMP-TEA-001-01-SHORT_VIDEO generated_candidate --actor content-operator --note "Candidate file recorded"
 aigc-quality output/production_package.json data/failure_taxonomy.json data/quality_fixture.json output/quality_report.json
 aigc-route output/production_package.json data/offline_provider_profile.json data/routing_policy.json output/routing_plan.json
+aigc-execution-preflight output/routing_plan.json data/execution_policy.json output/execution_preflight.json
 aigc-studio-trial
 python -m unittest discover -s tests -v
 ```
@@ -110,6 +116,8 @@ Then visit `http://localhost:8000`.
 
 [`examples/sample_routing_plan.json`](examples/sample_routing_plan.json) applies a reviewed three-request limit and eight abstract cost units to the sample package. The units are deliberately not currency, tokens, provider pricing or a quote. Exceeding either limit blocks atomically and emits no provider envelopes.
 
+[`examples/sample_execution_preflight.json`](examples/sample_execution_preflight.json) validates that eligible routing plan against a strict two-concurrency, three-attempt policy and produces deterministic request fingerprints, idempotency keys, job descriptors and two scheduling waves. Every attempt/request/send counter is zero. A duplicated fingerprint blocks the whole preflight and produces no job descriptor or wave.
+
 [`data/provider_profile_versions.json`](data/provider_profile_versions.json) is a synthetic baseline/candidate fixture. `aigc-provider-diff` reports removed capabilities and requires human review; it does not query a live provider or authorize execution.
 
 ## Failure taxonomy
@@ -125,12 +133,14 @@ Then visit `http://localhost:8000`.
 
 ## Template and model boundary
 
-The tasks are provider-neutral. Template files may change wording and structure only through an allowlisted set of business fields. Provider profiles declare supported task types, ratios and duration limits; they cannot contain unknown fields such as embedded API keys or enable execution. A future production adapter may route approved tasks to models, but this repository does not claim current access, model performance or commercial rights. Availability, pricing, regional access and terms must be checked at execution time.
+The tasks are provider-neutral. Template files may change wording and structure only through an allowlisted set of business fields. Provider profiles declare supported task types, ratios and duration limits; they cannot contain unknown fields such as embedded API keys or enable execution. The execution policy accepts only bounded integer concurrency/attempt values and a complete, non-decreasing retry-backoff schedule, but it does not run timers or retries. A future production adapter may route approved tasks to models, but this repository does not claim current access, model performance, provider idempotency or commercial rights. Availability, pricing, regional access and terms must be checked at execution time.
 
 ## Honest boundaries
 
-- No media asset is generated or inspected in v0.4.
+- No media asset is generated or inspected in v1.1.
 - No model API, paid service or cloud compute is used.
+- No live job queue, worker, retry, external request or provider send is created; job IDs and waves are deterministic review artifacts only.
+- Local fingerprint/idempotency keys do not prove that any provider accepts or enforces them.
 - Routing cost units are synthetic planning weights, not current provider prices or budget approval.
 - Prompts are deterministic planning artifacts, not proof of output quality.
 - Synthetic review labels prove only evaluator behavior; `pass_fixture_only` is not media approval.
@@ -165,8 +175,11 @@ The tasks are provider-neutral. Template files may change wording and structure 
 - v0.5: cost-unit, quota and provider-routing preflight plus reviewer trial evidence;
 - v0.6: offline comparison of reviewed routing-policy variants with zero-send guarantees;
 - v0.7: versioned provider-capability diff with breaking-change detection before request planning;
-- v0.8: deterministic human-review decision export with no execution boundary (current);
-- v1.0: controlled private pilot with approved assets and measured workflow outcomes.
+- v0.8: deterministic human-review decision export with no execution authority;
+- v0.9: append-only synthetic decision-review history;
+- v1.0: accepted reviewer-feedback replay and stale-feedback visibility;
+- v1.1: strict zero-send execution-scheduling preflight with duplicate atomic blocking (current);
+- future private pilot: authenticated execution service, durable queue, provider-enforced idempotency, approved assets and measured workflow outcomes.
 
 ## License
 

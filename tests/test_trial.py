@@ -25,12 +25,70 @@ class TrialReadinessTests(unittest.TestCase):
         self.assertEqual(report["core_flow"]["routing_status"], "eligible_for_human_review")
         self.assertEqual(report["feedback_regression"]["routing_status"], "blocked")
         self.assertEqual(report["feedback_regression"]["prepared_requests"], 0)
+        self.assertTrue(report["execution_preflight"]["passed"])
+        self.assertEqual(
+            report["execution_preflight"]["prepared_schedule"]["job_count"], 3
+        )
+        self.assertEqual(
+            report["execution_preflight"]["prepared_schedule"]["wave_count"], 2
+        )
+        self.assertFalse(
+            report["execution_preflight"]["prepared_schedule"][
+                "execution_authorized"
+            ]
+        )
+        self.assertTrue(
+            report["execution_preflight"]["prepared_schedule"][
+                "human_approval_required"
+            ]
+        )
+        for counter in (
+            "attempts_executed",
+            "external_requests_executed",
+            "provider_sends_executed",
+        ):
+            self.assertEqual(
+                report["execution_preflight"]["prepared_schedule"][counter], 0
+            )
+        self.assertEqual(
+            report["execution_preflight"]["duplicate_case"]["preflight_status"],
+            "blocked",
+        )
+        self.assertEqual(
+            report["execution_preflight"]["duplicate_case"]["jobs"], []
+        )
+        self.assertFalse(
+            report["execution_preflight"]["duplicate_case"][
+                "execution_authorized"
+            ]
+        )
+        self.assertTrue(
+            report["execution_preflight"]["duplicate_case"][
+                "human_approval_required"
+            ]
+        )
+        self.assertEqual(
+            report["execution_preflight"]["duplicate_case"]["attempts_executed"],
+            0,
+        )
+        self.assertEqual(
+            report["execution_preflight"]["duplicate_case"][
+                "external_requests_executed"
+            ],
+            0,
+        )
+        self.assertEqual(
+            report["execution_preflight"]["duplicate_case"][
+                "provider_sends_executed"
+            ],
+            0,
+        )
         self.assertTrue(report["review_history"]["append_only"])
         self.assertFalse(report["review_history"]["decision_execution_executed"])
 
     def test_evidence_index_links_real_files(self):
         checked = validate_evidence_index(ROOT, load_json_object(ROOT / "evidence" / "evidence_index.json"))
-        self.assertEqual(len(checked), 13)
+        self.assertEqual(len(checked), 14)
         self.assertTrue(all(item["passed"] for item in checked))
 
     def test_external_intake_requires_full_commit_and_consistent_decision(self):

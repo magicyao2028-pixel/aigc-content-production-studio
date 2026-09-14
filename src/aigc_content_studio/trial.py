@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+from copy import deepcopy
 from dataclasses import replace
 from datetime import date
 from pathlib import Path
@@ -17,6 +18,7 @@ from .workflow import ContentProductionWorkflow
 from .review_decisions import build_human_review_export
 from .review_history import validate_review_history
 from .feedback_replay import replay_reviewer_feedback
+from .execution_preflight import build_execution_preflight, load_execution_policy
 from .review_visibility import summarize_stale_feedback
 
 
@@ -135,6 +137,66 @@ def run_trial(root: Path) -> dict[str, Any]:
     routing_comparison = compare_routing_policies(package, adapter, variants)
     capability_diff = evaluate_provider_profile_diff(root)
     routing = build_guarded_request_plan(package, adapter, policy)
+    execution_policy = load_execution_policy(root / "data" / "execution_policy.json")
+    execution_schedule = build_execution_preflight(routing, execution_policy)
+    duplicate_package = deepcopy(package)
+    duplicate_package["deliverables"].append(
+        deepcopy(duplicate_package["deliverables"][0])
+    )
+    duplicate_routing = build_guarded_request_plan(
+        duplicate_package,
+        adapter,
+        replace(policy, max_requests_per_run=10, max_total_cost_units=20),
+    )
+    duplicate_schedule = build_execution_preflight(
+        duplicate_routing, execution_policy
+    )
+    execution_preflight = {
+        "passed": (
+            execution_schedule["preflight_status"]
+            == "prepared_for_human_review"
+            and execution_schedule["execution_status"] == "prepared_not_sent"
+            and execution_schedule["execution_authorized"] is False
+            and execution_schedule["human_approval_required"] is True
+            and execution_schedule["job_count"] == 3
+            and execution_schedule["wave_count"] == 2
+            and execution_schedule["attempts_executed"] == 0
+            and execution_schedule["external_requests_executed"] == 0
+            and execution_schedule["provider_sends_executed"] == 0
+            and len({job["job_id"] for job in execution_schedule["jobs"]}) == 3
+            and len(
+                {job["idempotency_key"] for job in execution_schedule["jobs"]}
+            )
+            == 3
+            and all(
+                job["execution_status"] == "prepared_not_sent"
+                and job["attempts_executed"] == 0
+                and job["external_requests_executed"] == 0
+                and job["provider_sends_executed"] == 0
+                for job in execution_schedule["jobs"]
+            )
+            and all(
+                wave["execution_status"] == "prepared_not_sent"
+                and wave["attempts_executed"] == 0
+                and wave["external_requests_executed"] == 0
+                and wave["provider_sends_executed"] == 0
+                for wave in execution_schedule["waves"]
+            )
+            and duplicate_schedule["preflight_status"] == "blocked"
+            and duplicate_schedule["execution_authorized"] is False
+            and duplicate_schedule["human_approval_required"] is True
+            and len(duplicate_schedule["duplicate_fingerprints"]) == 1
+            and duplicate_schedule["job_count"] == 0
+            and duplicate_schedule["wave_count"] == 0
+            and duplicate_schedule["jobs"] == []
+            and duplicate_schedule["waves"] == []
+            and duplicate_schedule["attempts_executed"] == 0
+            and duplicate_schedule["external_requests_executed"] == 0
+            and duplicate_schedule["provider_sends_executed"] == 0
+        ),
+        "prepared_schedule": execution_schedule,
+        "duplicate_case": duplicate_schedule,
+    }
     quality = evaluate_quality_files(
         root / "examples" / "sample_production_package.json",
         root / "data" / "failure_taxonomy.json",
@@ -172,6 +234,7 @@ def run_trial(root: Path) -> dict[str, Any]:
     }
     all_checks = [
         core_passed,
+        execution_preflight["passed"],
         len(routing_comparison["policies"]) == 3
         and routing_comparison["external_calls_executed"] == 0,
         feedback_regression["passed"],
@@ -213,6 +276,7 @@ def run_trial(root: Path) -> dict[str, Any]:
             "external_calls_executed": 0,
             "policy_comparison_count": len(routing_comparison["policies"]),
         },
+        "execution_preflight": execution_preflight,
         "feedback_regression": feedback_regression,
         "routing_comparison": routing_comparison,
         "provider_capability_diff": capability_diff,
@@ -227,6 +291,8 @@ def run_trial(root: Path) -> dict[str, Any]:
 
 
 def render_markdown(report: dict[str, Any]) -> str:
+    prepared = report["execution_preflight"]["prepared_schedule"]
+    duplicate = report["execution_preflight"]["duplicate_case"]
     return "\n".join([
         "# AIGC Studio Trial Readiness Report",
         "",
@@ -234,6 +300,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         f"- Overall: **{'PASS' if report['overall_passed'] else 'FAIL'}**",
         f"- End-to-end planning and routing: {'PASS' if report['core_flow']['passed'] else 'FAIL'}",
+        f"- Zero-send execution preflight: {'PASS' if report['execution_preflight']['passed'] else 'FAIL'}",
         f"- Atomic quota-block regression: {'PASS' if report['feedback_regression']['passed'] else 'FAIL'}",
         f"- Routing-policy comparison: {'PASS' if report['routing_comparison']['external_calls_executed'] == 0 else 'FAIL'}",
         f"- Provider capability diff: {'PASS' if report['provider_capability_diff']['status'] == 'breaking' else 'FAIL'}",
@@ -243,6 +310,14 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Stale reviewer-feedback visibility: {'PASS' if report['review_visibility']['stale_count'] == 1 and report['review_visibility']['decision_execution_executed'] is False else 'FAIL'}",
         f"- Evidence claims checked: {len(report['evidence_index'])}",
         f"- External candidates screened: {len(report['external_intake'])}",
+        "",
+        "## Execution preflight",
+        "",
+        f"- Prepared schedule: {prepared['job_count']} job descriptors in "
+        f"{prepared['wave_count']} waves; execution authorized: "
+        f"{str(prepared['execution_authorized']).lower()}.",
+        f"- Duplicate case: {duplicate['preflight_status']}; job descriptors: "
+        f"{duplicate['job_count']}; attempts/external requests/provider sends: 0/0/0.",
         "",
         "## Routing-policy comparison",
         "",

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 - 2026-09-14
+
+- added a strict offline execution policy for bounded concurrency, attempts and deterministic retry-backoff review;
+- added deterministic request fingerprints, idempotency keys, job descriptors and concurrency waves for eligible `prepared_not_sent` routing plans;
+- blocked duplicate fingerprints and request IDs atomically before job creation, with attempts, external requests and provider sends fixed at zero;
+- added a CLI, public-safe policy/sample, trial evidence and regression coverage while making no background-runner or provider-idempotency claim.
+
 ## 1.0.0 - 2026-09-03
 
 - added stale reviewer-feedback visibility for unresolved decisions using a declared cutoff;
